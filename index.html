@@ -1,13 +1,14 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Primary Meta Tags - Dynamically from data.js -->
+    <!-- Dynamic Meta Tags -->
     <title id="metaTitle">David Oloruntobi IGE - Senior Product/Programmes Manager</title>
-    <meta name="description" id="metaDescription" content="Senior Product/Programmes Manager with 6+ years of experience scaling digital programmes and Fintech solutions across Africa. Expert in Agile methodologies, product growth, and operations.">
-    <meta name="keywords" id="metaKeywords" content="Product Manager, Programmes Manager, Fintech, Agile, Product Growth, Operations Lead, Digital Products, Africa Tech, Lagos Nigeria">
+    <meta name="description" id="metaDescription" content="Senior Product/Programmes Manager with 6+ years of experience scaling digital programmes and Fintech solutions across Africa.">
+    <meta name="keywords" id="metaKeywords" content="Product Manager, Programmes Manager, Fintech, Agile, Product Growth">
     <meta name="author" id="metaAuthor" content="David Oloruntobi IGE">
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
@@ -15,32 +16,36 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" id="ogUrl" content="https://davidige.com/">
+    <meta property="og:url" id="ogUrl" content="">
     <meta property="og:title" id="ogTitle" content="David Oloruntobi IGE - Senior Product/Programmes Manager">
     <meta property="og:description" id="ogDescription" content="Senior Product/Programmes Manager with 6+ years of experience scaling digital programmes and Fintech solutions across Africa.">
-    <meta property="og:image" id="ogImage" content="/assets/me.png">
+    <meta property="og:image" id="ogImage" content="">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="David IGE Portfolio">
     <meta property="og:locale" content="en_US">
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" id="twitterUrl" content="https://davidige.com/">
-    <meta property="twitter:title" id="twitterTitle" content="David Oloruntobi IGE - Senior Product/Programmes Manager">
-    <meta property="twitter:description" id="twitterDescription" content="Senior Product/Programmes Manager with 6+ years of experience scaling digital programmes and Fintech solutions across Africa.">
-    <meta property="twitter:image" id="twitterImage" content="/assets/me.png">
-    <meta property="twitter:site" content="@davidige">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" id="twitterUrl" content="">
+    <meta name="twitter:title" id="twitterTitle" content="David Oloruntobi IGE - Senior Product/Programmes Manager">
+    <meta name="twitter:description" id="twitterDescription" content="Senior Product/Programmes Manager with 6+ years of experience scaling digital programmes and Fintech solutions across Africa.">
+    <meta name="twitter:image" id="twitterImage" content="">
+    <meta name="twitter:site" content="@davidige">
 
     <!-- LinkedIn -->
     <meta property="linkedin:profile" content="https://linkedin.com/in/davidige">
     
     <!-- Canonical URL -->
-    <link rel="canonical" id="canonicalUrl" href="https://davidige.com/">
+    <link rel="canonical" id="canonicalUrl" href="">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/logo.png">
     <link rel="apple-touch-icon" href="/assets/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#1a365d">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,26 +55,31 @@
     <!-- Google Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- AOS (Animate On Scroll) -->
+    <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     
-    <!-- CSS -->
+    <!-- Main Styles -->
     <link rel="stylesheet" href="/css/styles.css">
     
     <style>
-        /* Additional enhancements that don't modify existing CSS */
+        /* Additional enhancements */
         :root {
             --primary-dark: #0c2039;
             --primary: #1a365d;
             --primary-light: #2d4a7a;
             --accent-gold: #b59410;
             --accent-gold-light: #d4b95a;
-            --accent-green: #1e7e34;
+            --success: #1e7e34;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
             --dark: #121212;
             --dark-gray: #2d3748;
             --medium-gray: #4a5568;
@@ -89,14 +99,13 @@
             --radius-xl: 24px;
             --radius-full: 50%;
             
-            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: 0.2s ease;
+            --transition: 0.3s ease;
+            --transition-slow: 0.5s ease;
             
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-serif: 'Playfair Display', Georgia, serif;
             --font-accent: 'DM Serif Display', Georgia, serif;
-            --font-body: 'Source Serif Pro', Georgia, serif;
         }
         
         /* Scroll Progress */
@@ -111,8 +120,8 @@
             transition: width 0.1s ease;
         }
         
-        /* Floating Contact */
-        .floating-contact {
+        /* Floating Action Button */
+        .floating-fab {
             position: fixed;
             bottom: 30px;
             right: 30px;
@@ -123,16 +132,16 @@
             transition: all 0.3s ease;
         }
         
-        .floating-contact.visible {
+        .floating-fab.visible {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
         
-        .floating-contact-btn {
+        .fab-btn {
             width: 60px;
             height: 60px;
-            border-radius: 50%;
+            border-radius: var(--radius-full);
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             border: none;
             color: white;
@@ -145,7 +154,7 @@
             transition: all 0.3s ease;
         }
         
-        .floating-contact-btn:hover {
+        .fab-btn:hover {
             transform: scale(1.1) rotate(10deg);
             background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
         }
@@ -241,27 +250,7 @@
             text-align: center;
         }
         
-        .executive-badge {
-            background: linear-gradient(135deg, rgba(181, 148, 16, 0.1), rgba(26, 54, 93, 0.1));
-            color: var(--primary);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            border: 1px solid rgba(181, 148, 16, 0.2);
-            transition: var(--transition);
-        }
-        
-        .executive-badge:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent-gold);
-            background: linear-gradient(135deg, rgba(181, 148, 16, 0.15), rgba(26, 54, 93, 0.15));
-        }
-        
-        /* Profile Overlay */
+        /* Profile Enhancements */
         .profile-overlay {
             position: absolute;
             bottom: 0;
@@ -563,6 +552,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
         }
         
         .modal-header h2 {
@@ -594,105 +585,82 @@
             padding: 40px;
         }
         
-        /* CV Content */
-        .cv-section {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--light-gray);
+        /* Loader */
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--light-gray);
+            border-top-color: var(--accent-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
         
-        .cv-section:last-child {
-            border-bottom: none;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         
-        .cv-section h3 {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--white);
+            padding: 15px 25px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-elevated);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transform: translateX(-400px);
+            transition: transform 0.3s ease;
+            z-index: 2001;
+            border-left: 4px solid var(--primary);
         }
         
-        .cv-section h4 {
-            color: var(--primary-dark);
-            font-size: 1.2rem;
-            margin: 20px 0 10px;
+        .notification.show {
+            transform: translateX(0);
         }
         
-        .cv-section ul {
-            list-style-position: inside;
-            color: var(--dark-gray);
+        .notification-success {
+            border-left-color: var(--success);
         }
         
-        .cv-section li {
-            margin-bottom: 10px;
+        .notification-error {
+            border-left-color: var(--danger);
         }
         
-        .cv-download-btn {
-            margin-top: 30px;
-            width: 100%;
+        .notification-info {
+            border-left-color: var(--accent-gold);
         }
         
         /* Responsive */
+        @media (max-width: 1200px) {
+            .lightbox-prev { left: 20px; }
+            .lightbox-next { right: 20px; }
+        }
+        
         @media (max-width: 992px) {
-            .hero-stats {
-                justify-content: center;
-            }
-            
-            .lightbox-prev {
-                left: 20px;
-            }
-            
-            .lightbox-next {
-                right: 20px;
-            }
+            .hero-stats { justify-content: center; }
         }
         
         @media (max-width: 768px) {
-            .section-nav {
-                display: none;
-            }
-            
-            .floating-contact {
-                bottom: 20px;
-                right: 20px;
-            }
-            
-            .hero-stats {
-                flex-wrap: wrap;
-                gap: 20px;
-            }
-            
-            .profile-badge {
-                position: static;
-                transform: none;
-                margin-top: 20px;
-                width: fit-content;
-            }
-            
-            .modal-content {
-                width: 95%;
-                padding: 20px;
-            }
+            .section-nav { display: none; }
+            .floating-fab { bottom: 20px; right: 20px; }
+            .hero-stats { flex-wrap: wrap; gap: 20px; }
+            .profile-badge { position: static; transform: none; margin-top: 20px; width: fit-content; }
+            .lightbox-navigation { width: 40px; height: 40px; }
         }
         
         @media (max-width: 576px) {
-            .hero-stats {
-                flex-direction: column;
-                align-items: center;
-            }
+            .hero-stats { flex-direction: column; align-items: center; }
         }
         
-        /* Print styles */
+        /* Print */
         @media print {
-            .section-nav,
-            .floating-contact,
-            .scroll-progress,
-            .executive-header,
-            .executive-footer,
-            .hero-actions,
-            .contact-form,
-            .comments-section,
-            .nav-cta,
-            .mobile-menu-toggle {
+            .section-nav, .floating-fab, .scroll-progress,
+            .executive-header, .executive-footer, .hero-actions,
+            .contact-form, .nav-cta, .mobile-menu-toggle {
                 display: none !important;
             }
         }
@@ -703,22 +671,12 @@
     <div class="scroll-progress" id="scrollProgress"></div>
     
     <!-- Section Navigation -->
-    <div class="section-nav" id="sectionNav">
-        <div class="section-nav-dot active" data-target="home" data-title="Home"></div>
-        <div class="section-nav-dot" data-target="about" data-title="About"></div>
-        <div class="section-nav-dot" data-target="work" data-title="Experience"></div>
-        <div class="section-nav-dot" data-target="volunteer" data-title="Volunteer"></div>
-        <div class="section-nav-dot" data-target="certificates" data-title="Certificates"></div>
-        <div class="section-nav-dot" data-target="education" data-title="Education"></div>
-        <div class="section-nav-dot" data-target="skills" data-title="Skills"></div>
-        <div class="section-nav-dot" data-target="featured" data-title="Projects"></div>
-        <div class="section-nav-dot" data-target="contact" data-title="Contact"></div>
-    </div>
+    <div class="section-nav" id="sectionNav"></div>
     
-    <!-- Floating Contact -->
-    <div class="floating-contact" id="floatingContact">
-        <button class="floating-contact-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
-            <span class="material-symbols-rounded">chat</span>
+    <!-- Floating Action Button -->
+    <div class="floating-fab" id="floatingFab">
+        <button class="fab-btn" onclick="openRequestModal()" title="Request Information">
+            <span class="material-symbols-rounded">description</span>
         </button>
     </div>
 
@@ -747,7 +705,7 @@
                         <a href="#" class="nav-link">Resources</a>
                         <div class="dropdown-content">
                             <a href="/cv">View CV</a>
-                            <a href="#" id="requestInfoBtn">Request Information</a>
+                            <a href="#" onclick="openRequestModal()">Request Information</a>
                         </div>
                     </li>
                     <li><a href="#work" class="nav-link">Work</a></li>
@@ -770,34 +728,19 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <div class="hero-intro" data-aos="fade-right" data-aos-delay="200">
+                    <div class="hero-intro" data-aos="fade-right">
                         <div class="accent-line"></div>
-                        <span class="intro-label" id="heroIntroLabel">Senior Product/Programmes Manager</span>
+                        <span class="intro-label" id="heroIntroLabel"></span>
                     </div>
                     
-                    <h1 class="hero-title" data-aos="fade-right" data-aos-delay="400" id="heroName">David Oloruntobi IGE</h1>
+                    <h1 class="hero-title" data-aos="fade-right" data-aos-delay="200" id="heroName"></h1>
                     
-                    <h2 class="hero-subtitle" data-aos="fade-right" data-aos-delay="600" id="heroRole">Product Growth & Operations Lead</h2>
+                    <h2 class="hero-subtitle" data-aos="fade-right" data-aos-delay="400" id="heroRole"></h2>
                     
-                    <p class="hero-description" data-aos="fade-right" data-aos-delay="800" id="heroDescription">
-                        Loading description...
-                    </p>
+                    <p class="hero-description" data-aos="fade-right" data-aos-delay="600" id="heroDescription"></p>
                     
                     <!-- Stats Counter -->
-                    <div class="hero-stats" data-aos="fade-right" data-aos-delay="900">
-                        <div class="hero-stat-item">
-                            <div class="stat-counter" data-target="6">0</div>
-                            <div class="stat-label">Years Experience</div>
-                        </div>
-                        <div class="hero-stat-item">
-                            <div class="stat-counter" data-target="20">0</div>
-                            <div class="stat-label">Products Launched</div>
-                        </div>
-                        <div class="hero-stat-item">
-                            <div class="stat-counter" data-target="5">0</div>
-                            <div class="stat-label">Markets Expanded</div>
-                        </div>
-                    </div>
+                    <div class="hero-stats" data-aos="fade-right" data-aos-delay="800" id="heroStats"></div>
                     
                     <div class="hero-actions" data-aos="fade-right" data-aos-delay="1000">
                         <a href="#contact" class="executive-btn btn-primary">
@@ -810,17 +753,15 @@
                 </div>
                 
                 <div class="profile-frame" data-aos="fade-left" data-aos-delay="600">
-                    <img data-src="/assets/me.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='450' viewBox='0 0 450 450'%3E%3Crect width='450' height='450' fill='%23f0f0f0'/%3E%3Ctext x='225' y='225' font-family='Arial' font-size='24' fill='%23999' text-anchor='middle' dy='.3em'%3ELoading...%3C/text%3E%3C/svg%3E" 
-                         alt="David Oloruntobi IGE - Product Leader" 
+                    <img data-src="/assets/me.png" 
+                         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='450' height='450' viewBox='0 0 450 450'%3E%3Crect width='450' height='450' fill='%23f0f0f0'/%3E%3C/svg%3E" 
+                         alt="David Oloruntobi IGE" 
                          class="profile-image lazy-load"
                          id="profileImage">
                     <div class="profile-decoration"></div>
-                    <div class="profile-badge" id="profileBadge">
-                        <span class="material-symbols-outlined">verified</span>
-                        <span id="profileBadgeText">Product Leader</span>
-                    </div>
+                    <div class="profile-badge" id="profileBadge"></div>
                     <div class="profile-overlay">
-                        <p class="overlay-quote" id="profileQuote">"Driving innovation at the intersection of product management, programme delivery, and business growth"</p>
+                        <p class="overlay-quote" id="profileQuote"></p>
                         <p class="overlay-tag" id="profileTag">Executive Leadership</p>
                     </div>
                 </div>
@@ -834,9 +775,7 @@
             <div class="section-header" data-aos="fade-up">
                 <span class="section-label">About Me</span>
                 <h2 class="section-title">Product Leadership Excellence</h2>
-                <p class="section-subtitle" id="aboutSubtitle">
-                    Driving innovation at the intersection of product management, programme delivery, and business growth
-                </p>
+                <p class="section-subtitle" id="aboutSubtitle"></p>
             </div>
             
             <div class="contact-container">
@@ -848,8 +787,8 @@
                             <span class="material-symbols-outlined">person</span>
                         </div>
                         <div class="contact-details">
-                            <h4 id="profileName">David Oloruntobi IGE</h4>
-                            <p id="profileTitle">Senior Product/Programmes Manager, Product Growth & Operations Lead</p>
+                            <h4 id="profileName"></h4>
+                            <p id="profileTitle"></p>
                         </div>
                     </div>
                     
@@ -859,8 +798,8 @@
                         </div>
                         <div class="contact-details">
                             <h4>Location</h4>
-                            <p id="profileLocation">Lagos, Nigeria</p>
-                            <p id="profileAvailability">Available for remote and hybrid opportunities</p>
+                            <p id="profileLocation"></p>
+                            <p id="profileAvailability"></p>
                         </div>
                     </div>
                     
@@ -870,7 +809,7 @@
                         </div>
                         <div class="contact-details">
                             <h4>Contact</h4>
-                            <p id="profileEmail">david.ige@example.com</p>
+                            <p id="profileEmail"></p>
                             <p>Response within 24 hours</p>
                         </div>
                     </div>
@@ -881,27 +820,20 @@
                         </div>
                         <div class="contact-details">
                             <h4>Current Role</h4>
-                            <p id="profileCurrentRole">Product/Programme Manager at DTOTAL TECH CONSULT</p>
-                            <p>Leading AI Products Lab</p>
+                            <p id="profileCurrentRole"></p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="contact-form" data-aos="fade-left">
                     <h3>Professional Background</h3>
-                    <p style="margin-bottom: 20px; color: var(--dark-gray); line-height: 1.8;" id="aboutText">
-                        Loading...
-                    </p>
+                    <p style="margin-bottom: 20px; color: var(--dark-gray); line-height: 1.8;" id="aboutText"></p>
                     
-                    <div class="executive-badges" id="aboutBadges">
-                        <!-- Will be populated by JS -->
-                    </div>
+                    <div class="executive-badges" id="aboutBadges"></div>
                     
                     <!-- Testimonial Swiper -->
                     <div class="swiper testimonial-swiper">
-                        <div class="swiper-wrapper" id="testimonialWrapper">
-                            <!-- Will be populated by JS -->
-                        </div>
+                        <div class="swiper-wrapper" id="testimonialWrapper"></div>
                         <div class="swiper-pagination"></div>
                     </div>
                 </div>
@@ -915,14 +847,10 @@
             <div class="section-header" data-aos="fade-up">
                 <span class="section-label">Career Journey</span>
                 <h2 class="section-title">Professional Experience</h2>
-                <p class="section-subtitle">
-                    6+ years of progressive leadership in product management across Africa's leading tech companies
-                </p>
+                <p class="section-subtitle">6+ years of progressive leadership in product management across Africa's leading tech companies</p>
             </div>
             
-            <div class="work-timeline" id="workTimeline">
-                <!-- Will be populated by JavaScript from data.js -->
-            </div>
+            <div class="work-timeline" id="workTimeline"></div>
         </div>
     </section>
 
@@ -932,14 +860,10 @@
             <div class="section-header" data-aos="fade-up">
                 <span class="section-label">Community Impact</span>
                 <h2 class="section-title">Volunteer Leadership</h2>
-                <p class="section-subtitle">
-                    Building the next generation of product leaders through mentorship and community engagement
-                </p>
+                <p class="section-subtitle">Building the next generation of product leaders through mentorship and community engagement</p>
             </div>
             
-            <div class="work-timeline" id="volunteerTimeline">
-                <!-- Will be populated by JavaScript from data.js -->
-            </div>
+            <div class="work-timeline" id="volunteerTimeline"></div>
         </div>
     </section>
 
@@ -949,14 +873,10 @@
             <div class="section-header" data-aos="fade-up">
                 <span class="section-label">Continuous Learning</span>
                 <h2 class="section-title">Professional Certifications</h2>
-                <p class="section-subtitle">
-                    Industry-recognized credentials from leading global institutions
-                </p>
+                <p class="section-subtitle">Industry-recognized credentials from leading global institutions</p>
             </div>
             
-            <div class="certificates-grid" id="certificatesGrid">
-                <!-- Will be populated by JavaScript from data.js -->
-            </div>
+            <div class="certificates-grid" id="certificatesGrid"></div>
         </div>
     </section>
 
@@ -966,14 +886,10 @@
             <div class="section-header" data-aos="fade-up">
                 <span class="section-label">Academic Foundation</span>
                 <h2 class="section-title">Education</h2>
-                <p class="section-subtitle">
-                    Strong educational background combining business and science
-                </p>
+                <p class="section-subtitle">Strong educational background combining business and science</p>
             </div>
             
-            <div class="work-timeline" id="educationTimeline">
-                <!-- Will be populated by JavaScript from data.js -->
-            </div>
+            <div class="work-timeline" id="educationTimeline"></div>
         </div>
     </section>
 
@@ -983,14 +899,10 @@
             <div class="section-header" data-aos="fade-up">
                 <span class="section-label">Core Competencies</span>
                 <h2 class="section-title">Skills & Expertise</h2>
-                <p class="section-subtitle">
-                    Comprehensive skill set spanning product strategy, execution, and leadership
-                </p>
+                <p class="section-subtitle">Comprehensive skill set spanning product strategy, execution, and leadership</p>
             </div>
             
-            <div class="skills-container" id="skillsContainer">
-                <!-- Will be populated by JavaScript from data.js -->
-            </div>
+            <div class="skills-container" id="skillsContainer"></div>
         </div>
     </section>
 
@@ -1000,16 +912,12 @@
             <div class="section-header" data-aos="fade-up">
                 <span class="section-label">Featured Work</span>
                 <h2 class="section-title">Key Projects</h2>
-                <p class="section-subtitle">
-                    Innovative solutions delivering measurable business impact
-                </p>
+                <p class="section-subtitle">Innovative solutions delivering measurable business impact</p>
             </div>
             
             <!-- Swiper Carousel for Projects -->
             <div class="swiper project-swiper">
-                <div class="swiper-wrapper" id="featuredProjectsCarousel">
-                    <!-- Will be populated by JavaScript -->
-                </div>
+                <div class="swiper-wrapper" id="featuredProjectsCarousel"></div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
@@ -1029,9 +937,7 @@
             <div class="section-header" data-aos="fade-up">
                 <span class="section-label">Connect</span>
                 <h2 class="section-title">Let's Work Together</h2>
-                <p class="section-subtitle">
-                    Open to product leadership opportunities, consulting engagements, and professional collaborations
-                </p>
+                <p class="section-subtitle">Open to product leadership opportunities, consulting engagements, and professional collaborations</p>
             </div>
             
             <div class="contact-container">
@@ -1044,7 +950,7 @@
                         </div>
                         <div class="contact-details">
                             <h4>Phone</h4>
-                            <p id="contactPhone">+234 XXX XXX XXXX</p>
+                            <p id="contactPhone"></p>
                             <p>Available 9am - 6pm WAT</p>
                         </div>
                     </div>
@@ -1055,7 +961,7 @@
                         </div>
                         <div class="contact-details">
                             <h4>Email</h4>
-                            <p id="contactEmail">david.ige@example.com</p>
+                            <p id="contactEmail"></p>
                             <p>Response within 24 hours</p>
                         </div>
                     </div>
@@ -1066,14 +972,12 @@
                         </div>
                         <div class="contact-details">
                             <h4>Location</h4>
-                            <p id="contactLocation">Lagos, Nigeria</p>
+                            <p id="contactLocation"></p>
                             <p>Available for remote and hybrid work</p>
                         </div>
                     </div>
                     
-                    <div class="social-links" id="socialLinks">
-                        <!-- Will be populated by JS -->
-                    </div>
+                    <div class="social-links" id="socialLinks"></div>
                 </div>
                 
                 <div class="contact-form" data-aos="fade-left">
@@ -1118,60 +1022,51 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3 id="footerName">David IGE</h3>
-                    <p id="footerBio">
-                        Senior Product/Programmes Manager with 6+ years of experience scaling digital programmes 
-                        and Fintech solutions across Africa.
-                    </p>
-                    <div class="social-links" id="footerSocialLinks">
-                        <!-- Will be populated by JS -->
-                    </div>
+                    <h3 id="footerName"></h3>
+                    <p id="footerBio"></p>
+                    <div class="social-links" id="footerSocialLinks"></div>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Quick Links</h3>
-                    <ul class="footer-links" id="footerQuickLinks">
-                        <!-- Will be populated by JS -->
-                    </ul>
+                    <ul class="footer-links" id="footerQuickLinks"></ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Services</h3>
-                    <ul class="footer-links" id="footerServices">
-                        <!-- Will be populated by JS -->
-                    </ul>
+                    <ul class="footer-links" id="footerServices"></ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Contact</h3>
-                    <p id="footerContactLocation">Lagos, Nigeria</p>
-                    <p id="footerContactEmail">david.ige@example.com</p>
-                    <p id="footerContactPhone">+234 XXX XXX XXXX</p>
+                    <p id="footerContactLocation"></p>
+                    <p id="footerContactEmail"></p>
+                    <p id="footerContactPhone"></p>
                     <p>Available for opportunities</p>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; <span id="currentYear"></span> <span id="copyrightName">David Oloruntobi IGE</span>. All rights reserved. | Product Leader</p>
+                <p>&copy; <span id="currentYear"></span> <span id="copyrightName"></span>. All rights reserved. | Product Leader</p>
             </div>
         </div>
     </footer>
 
-    <!-- Lightbox for Gallery -->
+    <!-- Lightbox -->
     <div class="executive-lightbox" id="executiveLightbox">
-        <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">
+        <button class="lightbox-close" id="lightboxClose">
             <span class="material-symbols-outlined">close</span>
         </button>
         
         <div class="lightbox-content">
-            <button class="lightbox-navigation lightbox-prev" id="lightboxPrev" aria-label="Previous image">
+            <button class="lightbox-navigation lightbox-prev" id="lightboxPrev">
                 <span class="material-symbols-outlined">chevron_left</span>
             </button>
             
             <img src="" alt="" class="lightbox-image" id="lightboxImage">
             <p class="lightbox-quote" id="lightboxQuote"></p>
             
-            <button class="lightbox-navigation lightbox-next" id="lightboxNext" aria-label="Next image">
+            <button class="lightbox-navigation lightbox-next" id="lightboxNext">
                 <span class="material-symbols-outlined">chevron_right</span>
             </button>
             
@@ -1184,7 +1079,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Request Professional Information</h2>
-                <button class="modal-close" id="requestModalClose">
+                <button class="modal-close" onclick="closeRequestModal()">
                     <span class="material-symbols-outlined">close</span>
                 </button>
             </div>
@@ -1242,8 +1137,12 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="/js/data.js"></script>
-    <script src="/js/email.js"></script>
+    <script src="/js/main.js"></script>
+    
     <script>
+        // Get base URL dynamically
+        const baseUrl = window.location.origin;
+        
         // Initialize AOS
         AOS.init({
             duration: 800,
@@ -1252,121 +1151,161 @@
             easing: 'ease-in-out'
         });
 
-        // Initialize Swiper
-        const projectSwiper = new Swiper('.project-swiper', {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            loop: true,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints: {
-                640: {
-                    slidesPerView: 2,
+        // Initialize Swipers
+        let projectSwiper, testimonialSwiper;
+        
+        function initSwipers() {
+            // Project Swiper
+            projectSwiper = new Swiper('.project-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: false,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
                 },
-                1024: {
-                    slidesPerView: 3,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
                 },
-            }
-        });
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    640: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 },
+                }
+            });
 
-        const testimonialSwiper = new Swiper('.testimonial-swiper', {
-            slidesPerView: 1,
-            spaceBetween: 20,
-            loop: true,
-            autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-        });
+            // Testimonial Swiper
+            testimonialSwiper = new Swiper('.testimonial-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                loop: true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+            });
+        }
 
         // Populate all content from siteData
         document.addEventListener('DOMContentLoaded', function() {
+            // Check if siteData exists
+            if (typeof siteData === 'undefined') {
+                console.error('siteData not loaded');
+                return;
+            }
+
             // Set current year
             document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-            // Update meta tags
+            // Update meta tags dynamically
             if (siteData.meta) {
-                document.getElementById('metaTitle').textContent = siteData.meta.title;
-                document.getElementById('metaDescription').content = siteData.meta.description;
-                document.getElementById('metaKeywords').content = siteData.meta.keywords;
-                document.getElementById('metaAuthor').content = siteData.meta.author;
+                const meta = siteData.meta;
                 
-                document.getElementById('ogUrl').content = siteData.meta.siteUrl;
-                document.getElementById('ogTitle').content = siteData.meta.title;
-                document.getElementById('ogDescription').content = siteData.meta.description;
-                document.getElementById('ogImage').content = siteData.meta.image;
+                document.getElementById('metaTitle').textContent = meta.title;
+                document.getElementById('metaDescription').content = meta.description;
+                document.getElementById('metaKeywords').content = meta.keywords;
+                document.getElementById('metaAuthor').content = meta.author;
                 
-                document.getElementById('twitterUrl').content = siteData.meta.siteUrl;
-                document.getElementById('twitterTitle').content = siteData.meta.title;
-                document.getElementById('twitterDescription').content = siteData.meta.description;
-                document.getElementById('twitterImage').content = siteData.meta.image;
+                // Dynamic URLs
+                const pageUrl = baseUrl;
+                const imageUrl = baseUrl + meta.image;
                 
-                document.getElementById('canonicalUrl').href = siteData.meta.siteUrl;
+                document.getElementById('ogUrl').content = pageUrl;
+                document.getElementById('ogTitle').content = meta.title;
+                document.getElementById('ogDescription').content = meta.description;
+                document.getElementById('ogImage').content = imageUrl;
+                
+                document.getElementById('twitterUrl').content = pageUrl;
+                document.getElementById('twitterTitle').content = meta.title;
+                document.getElementById('twitterDescription').content = meta.description;
+                document.getElementById('twitterImage').content = imageUrl;
+                
+                document.getElementById('canonicalUrl').href = pageUrl;
             }
 
             // Update personal info
             if (siteData.personal) {
-                document.getElementById('heroIntroLabel').textContent = siteData.personal.title;
-                document.getElementById('heroName').textContent = siteData.personal.name;
-                document.getElementById('heroRole').textContent = siteData.personal.role;
-                document.getElementById('heroDescription').textContent = siteData.personal.about;
+                const p = siteData.personal;
                 
-                document.getElementById('profileName').textContent = siteData.personal.name;
-                document.getElementById('profileTitle').textContent = siteData.personal.title;
-                document.getElementById('profileLocation').textContent = siteData.personal.location;
-                document.getElementById('profileEmail').textContent = siteData.personal.email;
-                document.getElementById('profileCurrentRole').textContent = siteData.personal.currentRole || 'Product/Programme Manager at DTOTAL TECH CONSULT';
-                document.getElementById('profileAvailability').textContent = siteData.personal.availability || 'Available for remote and hybrid opportunities';
-                document.getElementById('aboutText').textContent = siteData.personal.shortBio || siteData.personal.about;
+                // Hero section
+                document.getElementById('heroIntroLabel').textContent = p.title;
+                document.getElementById('heroName').textContent = p.name;
+                document.getElementById('heroRole').textContent = p.role;
+                document.getElementById('heroDescription').textContent = p.about;
                 
-                document.getElementById('profileBadgeText').textContent = siteData.personal.role;
-                document.getElementById('profileQuote').textContent = siteData.personal.quote || '"Driving innovation through product leadership"';
+                // Hero stats
+                document.getElementById('heroStats').innerHTML = `
+                    <div class="hero-stat-item">
+                        <div class="stat-counter" data-target="6">0</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="hero-stat-item">
+                        <div class="stat-counter" data-target="20">0</div>
+                        <div class="stat-label">Products Launched</div>
+                    </div>
+                    <div class="hero-stat-item">
+                        <div class="stat-counter" data-target="5">0</div>
+                        <div class="stat-label">Markets Expanded</div>
+                    </div>
+                `;
+                
+                // Profile section
+                document.getElementById('profileName').textContent = p.name;
+                document.getElementById('profileTitle').textContent = p.title;
+                document.getElementById('profileLocation').textContent = p.location;
+                document.getElementById('profileEmail').textContent = p.email;
+                document.getElementById('profileCurrentRole').textContent = p.currentRole || 'Product/Programme Manager at DTOTAL TECH CONSULT';
+                document.getElementById('profileAvailability').textContent = p.availability || 'Available for remote and hybrid opportunities';
+                document.getElementById('aboutText').textContent = p.shortBio || p.about;
+                document.getElementById('aboutSubtitle').textContent = p.shortBio || p.about.substring(0, 100) + '...';
+                
+                // Profile badge
+                document.getElementById('profileBadge').innerHTML = `
+                    <span class="material-symbols-outlined">verified</span>
+                    <span>${p.role}</span>
+                `;
+                
+                document.getElementById('profileQuote').textContent = p.quote || '"Driving innovation at the intersection of product management, programme delivery, and business growth"';
                 document.getElementById('profileTag').textContent = 'Executive Leadership';
                 
-                document.getElementById('logoName').textContent = siteData.personal.name.split(' ').slice(0, 2).join(' ');
-                document.getElementById('logoTitle').textContent = siteData.personal.role;
+                // Logo
+                document.getElementById('logoName').textContent = p.name.split(' ').slice(0, 2).join(' ');
+                document.getElementById('logoTitle').textContent = p.role;
                 
-                document.getElementById('footerName').textContent = siteData.personal.name.split(' ').slice(0, 2).join(' ');
-                document.getElementById('footerBio').textContent = siteData.personal.shortBio || siteData.personal.about.substring(0, 150) + '...';
-                document.getElementById('copyrightName').textContent = siteData.personal.name;
+                // Footer
+                document.getElementById('footerName').textContent = p.name.split(' ').slice(0, 2).join(' ');
+                document.getElementById('footerBio').textContent = p.shortBio || p.about.substring(0, 150) + '...';
+                document.getElementById('copyrightName').textContent = p.name;
                 
-                document.getElementById('contactPhone').textContent = siteData.personal.phone || '+234 803 456 7890';
-                document.getElementById('contactEmail').textContent = siteData.personal.email;
-                document.getElementById('contactLocation').textContent = siteData.personal.location;
+                // Contact
+                document.getElementById('contactPhone').textContent = p.phone || '+234 803 456 7890';
+                document.getElementById('contactEmail').textContent = p.email;
+                document.getElementById('contactLocation').textContent = p.location;
                 
-                document.getElementById('footerContactLocation').textContent = siteData.personal.location;
-                document.getElementById('footerContactEmail').textContent = siteData.personal.email;
-                document.getElementById('footerContactPhone').textContent = siteData.personal.phone || '+234 803 456 7890';
+                // Footer contact
+                document.getElementById('footerContactLocation').textContent = p.location;
+                document.getElementById('footerContactEmail').textContent = p.email;
+                document.getElementById('footerContactPhone').textContent = p.phone || '+234 803 456 7890';
             }
 
             // About Badges
-            const badgesContainer = document.getElementById('aboutBadges');
-            if (badgesContainer) {
-                const badges = ['Product Strategy', 'Data-Driven', 'Growth Focused', 'Team Leadership', 'Innovation', 'Pan-African'];
-                badgesContainer.innerHTML = badges.map(badge => 
-                    `<span class="executive-badge"><span class="material-symbols-outlined" style="font-size: 16px;">verified</span> ${badge}</span>`
-                ).join('');
-            }
+            const badges = ['Product Strategy', 'Data-Driven', 'Growth Focused', 'Team Leadership', 'Innovation', 'Pan-African'];
+            document.getElementById('aboutBadges').innerHTML = badges.map(badge => 
+                `<span class="executive-badge"><span class="material-symbols-outlined" style="font-size: 16px;">verified</span> ${badge}</span>`
+            ).join('');
 
             // Social Links
-            const socialLinksContainer = document.getElementById('socialLinks');
-            if (socialLinksContainer && siteData.personal?.social) {
+            if (siteData.personal?.social) {
                 const social = siteData.personal.social;
-                socialLinksContainer.innerHTML = `
+                const socialLinks = `
                     <a href="${social.linkedin}" class="social-link" target="_blank" rel="noopener">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
@@ -1380,40 +1319,28 @@
                         <span class="material-symbols-outlined">email</span>
                     </a>
                 `;
-            }
-
-            // Footer Social Links
-            const footerSocialLinks = document.getElementById('footerSocialLinks');
-            if (footerSocialLinks && siteData.personal?.social) {
-                const social = siteData.personal.social;
-                footerSocialLinks.innerHTML = `
-                    <a href="${social.linkedin}" class="social-link" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="${social.twitter}" class="social-link" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
-                    <a href="${social.github}" class="social-link" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-                `;
+                document.getElementById('socialLinks').innerHTML = socialLinks;
+                document.getElementById('footerSocialLinks').innerHTML = socialLinks;
             }
 
             // Footer Quick Links
-            const footerQuickLinks = document.getElementById('footerQuickLinks');
-            if (footerQuickLinks && siteData.navigation) {
-                footerQuickLinks.innerHTML = siteData.navigation
+            if (siteData.navigation) {
+                document.getElementById('footerQuickLinks').innerHTML = siteData.navigation
                     .filter(item => !item.dropdown)
                     .map(item => `<li><a href="${item.link}"><span class="material-symbols-outlined">chevron_right</span> ${item.label}</a></li>`)
                     .join('');
             }
 
             // Footer Services
-            const footerServices = document.getElementById('footerServices');
-            if (footerServices && siteData.footer?.services) {
-                footerServices.innerHTML = siteData.footer.services
+            if (siteData.footer?.services) {
+                document.getElementById('footerServices').innerHTML = siteData.footer.services
                     .map(service => `<li><a href="${service.link}"><span class="material-symbols-outlined">chevron_right</span> ${service.label}</a></li>`)
                     .join('');
             }
 
-            // Populate Work Experience
-            const workTimeline = document.getElementById('workTimeline');
-            if (workTimeline && siteData.work) {
-                workTimeline.innerHTML = siteData.work.map(job => `
+            // Work Experience
+            if (siteData.work) {
+                document.getElementById('workTimeline').innerHTML = siteData.work.map(job => `
                     <div class="work-item smart-card" data-aos="fade-up">
                         <div class="work-header">
                             <div>
@@ -1434,10 +1361,9 @@
                 `).join('');
             }
 
-            // Populate Volunteer Experience
-            const volunteerTimeline = document.getElementById('volunteerTimeline');
-            if (volunteerTimeline && siteData.volunteer) {
-                volunteerTimeline.innerHTML = siteData.volunteer.map(vol => `
+            // Volunteer Experience
+            if (siteData.volunteer) {
+                document.getElementById('volunteerTimeline').innerHTML = siteData.volunteer.map(vol => `
                     <div class="work-item smart-card" data-aos="fade-up">
                         <div class="work-header">
                             <div>
@@ -1458,11 +1384,10 @@
                 `).join('');
             }
 
-            // Populate Certificates
-            const certificatesGrid = document.getElementById('certificatesGrid');
-            if (certificatesGrid && siteData.certificates) {
-                certificatesGrid.innerHTML = siteData.certificates.map(cert => `
-                    <div class="certificate-card smart-card" data-aos="zoom-in" data-aos-delay="${Math.random() * 200}">
+            // Certificates
+            if (siteData.certificates) {
+                document.getElementById('certificatesGrid').innerHTML = siteData.certificates.map(cert => `
+                    <div class="certificate-card smart-card" data-aos="zoom-in">
                         <div class="certificate-icon">
                             <span class="material-symbols-outlined">verified</span>
                         </div>
@@ -1473,10 +1398,9 @@
                 `).join('');
             }
 
-            // Populate Education
-            const educationTimeline = document.getElementById('educationTimeline');
-            if (educationTimeline && siteData.education) {
-                educationTimeline.innerHTML = siteData.education.map(edu => `
+            // Education
+            if (siteData.education) {
+                document.getElementById('educationTimeline').innerHTML = siteData.education.map(edu => `
                     <div class="work-item smart-card" data-aos="fade-up">
                         <div class="work-header">
                             <div>
@@ -1499,10 +1423,9 @@
                 `).join('');
             }
 
-            // Populate Skills
-            const skillsContainer = document.getElementById('skillsContainer');
-            if (skillsContainer && siteData.skills) {
-                skillsContainer.innerHTML = siteData.skills.map(category => `
+            // Skills
+            if (siteData.skills) {
+                document.getElementById('skillsContainer').innerHTML = siteData.skills.map(category => `
                     <div class="skill-category" data-aos="fade-up">
                         <h3>${category.category}</h3>
                         <div class="skill-items">
@@ -1513,7 +1436,7 @@
                                         <span>${skill.level}%</span>
                                     </div>
                                     <div class="skill-bar">
-                                        <div class="skill-level" data-level="${skill.level}%" style="width: ${skill.level}%"></div>
+                                        <div class="skill-level" style="width: ${skill.level}%"></div>
                                     </div>
                                 </div>
                             `).join('')}
@@ -1522,10 +1445,9 @@
                 `).join('');
             }
 
-            // Populate Testimonials
-            const testimonialWrapper = document.getElementById('testimonialWrapper');
-            if (testimonialWrapper && siteData.testimonials) {
-                testimonialWrapper.innerHTML = siteData.testimonials.map(testimonial => `
+            // Testimonials
+            if (siteData.testimonials) {
+                document.getElementById('testimonialWrapper').innerHTML = siteData.testimonials.map(testimonial => `
                     <div class="swiper-slide">
                         <div class="testimonial-card">
                             <div class="testimonial-rating">
@@ -1542,17 +1464,16 @@
                         </div>
                     </div>
                 `).join('');
-                testimonialSwiper.update();
             }
 
-            // Populate Featured Projects Carousel
-            const featuredCarousel = document.getElementById('featuredProjectsCarousel');
-            if (featuredCarousel && siteData.projects) {
+            // Featured Projects
+            if (siteData.projects) {
                 const featured = siteData.projects.filter(p => p.featured).slice(0, 6);
-                featuredCarousel.innerHTML = featured.map(project => `
+                document.getElementById('featuredProjectsCarousel').innerHTML = featured.map(project => `
                     <div class="swiper-slide">
-                        <a href="${project.link || '/portfolio'}" class="portfolio-item smart-card">
-                            <img data-src="${project.image}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='350' height='250' viewBox='0 0 350 250'%3E%3Crect width='350' height='250' fill='%23f0f0f0'/%3E%3Ctext x='175' y='125' font-family='Arial' font-size='18' fill='%23999' text-anchor='middle' dy='.3em'%3ELoading...%3C/text%3E%3C/svg%3E" 
+                        <a href="/portfolio/${project.slug || project.id}" class="portfolio-item smart-card">
+                            <img data-src="${project.image}" 
+                                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='350' height='250' viewBox='0 0 350 250'%3E%3Crect width='350' height='250' fill='%23f0f0f0'/%3E%3C/svg%3E" 
                                  alt="${project.title}" class="portfolio-image lazy-load">
                             <div class="portfolio-content">
                                 <h3 class="portfolio-title">${project.title}</h3>
@@ -1565,8 +1486,17 @@
                         </a>
                     </div>
                 `).join('');
-                projectSwiper.update();
             }
+
+            // Initialize Swipers after content is loaded
+            initSwipers();
+
+            // Section Navigation
+            const sections = ['home', 'about', 'work', 'volunteer', 'certificates', 'education', 'skills', 'featured', 'contact'];
+            const navContainer = document.getElementById('sectionNav');
+            navContainer.innerHTML = sections.map(section => 
+                `<div class="section-nav-dot" data-target="${section}" data-title="${section.charAt(0).toUpperCase() + section.slice(1)}"></div>`
+            ).join('');
 
             // Counter Animation
             const counterObserver = new IntersectionObserver((entries) => {
@@ -1602,77 +1532,22 @@
                         entry.target.classList.add('visible');
                     }
                 });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px'
-            });
+            }, { threshold: 0.1 });
             
             document.querySelectorAll('.smart-card').forEach(el => {
                 smartViewObserver.observe(el);
             });
 
-            // Scroll Progress
-            window.addEventListener('scroll', () => {
-                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (winScroll / height) * 100;
-                document.getElementById('scrollProgress').style.width = scrolled + '%';
-                
-                const floatingContact = document.getElementById('floatingContact');
-                if (winScroll > 500) {
-                    floatingContact.classList.add('visible');
-                } else {
-                    floatingContact.classList.remove('visible');
-                }
-                
-                updateActiveSectionDot();
-            });
-
-            // Section Navigation
-            const sections = document.querySelectorAll('section[id]');
-            const navDots = document.querySelectorAll('.section-nav-dot');
-            
-            function updateActiveSectionDot() {
-                const scrollPosition = window.scrollY + 200;
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionBottom = sectionTop + section.offsetHeight;
-                    const sectionId = section.getAttribute('id');
-                    
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                        navDots.forEach(dot => {
-                            dot.classList.remove('active');
-                            if (dot.dataset.target === sectionId) {
-                                dot.classList.add('active');
-                            }
-                        });
-                    }
-                });
-            }
-            
-            navDots.forEach(dot => {
-                dot.addEventListener('click', () => {
-                    const targetId = dot.dataset.target;
-                    const targetSection = document.getElementById(targetId);
-                    
-                    if (targetSection) {
-                        targetSection.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-
             // Lazy Loading Images
-            const imageObserver = new IntersectionObserver((entries, observer) => {
+            const imageObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.classList.add('loaded');
-                        observer.unobserve(img);
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.classList.add('loaded');
+                        }
+                        imageObserver.unobserve(img);
                     }
                 });
             });
@@ -1681,75 +1556,107 @@
                 imageObserver.observe(img);
             });
 
-            // Request Modal
-            const requestBtn = document.getElementById('requestInfoBtn');
-            const requestModal = document.getElementById('requestModal');
-            const requestClose = document.getElementById('requestModalClose');
-            
-            if (requestBtn && requestModal) {
-                requestBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    requestModal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-            }
-            
-            if (requestClose && requestModal) {
-                requestClose.addEventListener('click', () => {
-                    requestModal.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            }
-            
-            window.addEventListener('click', (e) => {
-                if (e.target === requestModal) {
-                    requestModal.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
+            // Scroll Progress and Floating Button
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById('scrollProgress').style.width = scrolled + '%';
+                
+                const floatingFab = document.getElementById('floatingFab');
+                floatingFab.classList.toggle('visible', winScroll > 500);
+                
+                updateActiveSectionDot();
             });
 
-            // Request Form Submission
-            const requestForm = document.getElementById('requestForm');
-            if (requestForm) {
-                requestForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    
-                    const formData = {
-                        name: document.getElementById('reqName').value,
-                        email: document.getElementById('reqEmail').value,
-                        company: document.getElementById('reqCompany').value,
-                        position: document.getElementById('reqPosition').value,
-                        requestType: document.getElementById('reqType').value,
-                        details: document.getElementById('reqDetails').value
-                    };
-                    
-                    const submitBtn = requestForm.querySelector('button[type="submit"]');
-                    const originalText = submitBtn.innerHTML;
-                    submitBtn.innerHTML = '<span class="loader"></span> Sending...';
-                    submitBtn.disabled = true;
-                    
-                    setTimeout(() => {
-                        const requests = JSON.parse(localStorage.getItem('requests') || '[]');
-                        requests.push({
-                            ...formData,
-                            id: Date.now(),
-                            date: new Date().toISOString(),
-                            status: 'pending'
-                        });
-                        localStorage.setItem('requests', JSON.stringify(requests));
+            // Section Navigation
+            const navDots = document.querySelectorAll('.section-nav-dot');
+            
+            function updateActiveSectionDot() {
+                const scrollPosition = window.scrollY + 200;
+                
+                sections.forEach(section => {
+                    const element = document.getElementById(section);
+                    if (element) {
+                        const sectionTop = element.offsetTop;
+                        const sectionBottom = sectionTop + element.offsetHeight;
                         
-                        showNotification('Request sent successfully! You will receive a response within 24 hours.', 'success');
-                        requestForm.reset();
-                        requestModal.classList.remove('active');
-                        document.body.style.overflow = '';
-                        
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }, 2000);
+                        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                            navDots.forEach(dot => {
+                                dot.classList.toggle('active', dot.dataset.target === section);
+                            });
+                        }
+                    }
+                });
+            }
+            
+            navDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const targetId = dot.dataset.target;
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Mobile Menu Toggle
+            const mobileToggle = document.getElementById('mobileMenuToggle');
+            const navLinks = document.getElementById('navLinks');
+            const menuOverlay = document.getElementById('menuOverlay');
+            
+            if (mobileToggle && navLinks) {
+                mobileToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    menuOverlay.classList.toggle('active');
+                    document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+                    mobileToggle.innerHTML = navLinks.classList.contains('active') 
+                        ? '<span class="material-symbols-outlined">close</span>'
+                        : '<span class="material-symbols-outlined">menu</span>';
+                });
+                
+                menuOverlay.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    mobileToggle.innerHTML = '<span class="material-symbols-outlined">menu</span>';
                 });
             }
 
-            // Contact Form Submission
+            // Header Scroll Effect
+            const header = document.getElementById('mainHeader');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.scrollY > 50);
+            });
+
+            // Active Navigation Link
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY + 150;
+                
+                document.querySelectorAll('section[id]').forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href') === `#${sectionId}`);
+                        });
+                    }
+                });
+            });
+
+            // Dropdown for mobile
+            document.querySelectorAll('.dropdown > a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        link.parentElement.classList.toggle('active');
+                    }
+                });
+            });
+
+            // Contact Form
             const contactForm = document.getElementById('contactForm');
             if (contactForm) {
                 contactForm.addEventListener('submit', async (e) => {
@@ -1787,72 +1694,136 @@
                 });
             }
 
-            // Mobile Menu Toggle
-            const mobileToggle = document.getElementById('mobileMenuToggle');
-            const navLinksContainer = document.getElementById('navLinks');
-            const menuOverlay = document.getElementById('menuOverlay');
-            
-            if (mobileToggle && navLinksContainer) {
-                mobileToggle.addEventListener('click', () => {
-                    navLinksContainer.classList.toggle('active');
-                    menuOverlay.classList.toggle('active');
-                    mobileToggle.innerHTML = navLinksContainer.classList.contains('active') 
-                        ? '<span class="material-symbols-outlined">close</span>'
-                        : '<span class="material-symbols-outlined">menu</span>';
-                    document.body.style.overflow = navLinksContainer.classList.contains('active') ? 'hidden' : '';
-                });
-                
-                menuOverlay.addEventListener('click', () => {
-                    navLinksContainer.classList.remove('active');
-                    menuOverlay.classList.remove('active');
-                    mobileToggle.innerHTML = '<span class="material-symbols-outlined">menu</span>';
-                    document.body.style.overflow = '';
+            // Request Form
+            const requestForm = document.getElementById('requestForm');
+            if (requestForm) {
+                requestForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const formData = {
+                        name: document.getElementById('reqName').value,
+                        email: document.getElementById('reqEmail').value,
+                        company: document.getElementById('reqCompany').value,
+                        position: document.getElementById('reqPosition').value,
+                        requestType: document.getElementById('reqType').value,
+                        details: document.getElementById('reqDetails').value
+                    };
+                    
+                    const submitBtn = requestForm.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<span class="loader"></span> Sending...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        const requests = JSON.parse(localStorage.getItem('requests') || '[]');
+                        requests.push({
+                            ...formData,
+                            id: Date.now(),
+                            date: new Date().toISOString(),
+                            status: 'pending'
+                        });
+                        localStorage.setItem('requests', JSON.stringify(requests));
+                        
+                        showNotification('Request sent successfully! You will receive a response within 24 hours.', 'success');
+                        requestForm.reset();
+                        closeRequestModal();
+                        
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 2000);
                 });
             }
 
-            // Active Navigation Link
-            window.addEventListener('scroll', () => {
-                const scrollPosition = window.scrollY + 150;
+            // Lightbox functionality
+            const lightbox = document.getElementById('executiveLightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxQuote = document.getElementById('lightboxQuote');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxPrev = document.getElementById('lightboxPrev');
+            const lightboxNext = document.getElementById('lightboxNext');
+            
+            const galleryData = siteData.projects?.map(p => ({
+                img: p.image,
+                quote: p.subtitle,
+                category: p.category
+            })) || [];
+            
+            let currentImageIndex = 0;
+            let isLightboxTransitioning = false;
+            
+            function openLightbox(index) {
+                currentImageIndex = index;
+                updateLightbox();
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            function navigateLightbox(direction) {
+                if (isLightboxTransitioning || galleryData.length === 0) return;
+                isLightboxTransitioning = true;
+                lightboxImage.style.opacity = '0';
+                lightboxQuote.style.opacity = '0';
                 
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionBottom = sectionTop + section.offsetHeight;
-                    const sectionId = section.getAttribute('id');
-                    
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                        document.querySelectorAll('.nav-link').forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href') === `#${sectionId}`) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
+                setTimeout(() => {
+                    currentImageIndex = (currentImageIndex + direction + galleryData.length) % galleryData.length;
+                    updateLightbox();
+                    lightboxImage.style.opacity = '1';
+                    lightboxQuote.style.opacity = '1';
+                    isLightboxTransitioning = false;
+                }, 300);
+            }
+            
+            function updateLightbox() {
+                if (galleryData.length === 0) return;
+                const data = galleryData[currentImageIndex];
+                lightboxImage.src = data.img;
+                lightboxImage.alt = data.category;
+                lightboxQuote.textContent = data.quote;
+                lightboxCounter.textContent = `${currentImageIndex + 1} / ${galleryData.length}`;
+            }
+            
+            document.querySelectorAll('.portfolio-image').forEach((img, index) => {
+                img.addEventListener('click', () => openLightbox(index));
             });
-
-            // Header Scroll Effect
-            const header = document.getElementById('mainHeader');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
+            
+            lightboxPrev?.addEventListener('click', () => navigateLightbox(-1));
+            lightboxNext?.addEventListener('click', () => navigateLightbox(1));
+            lightboxClose?.addEventListener('click', closeLightbox);
+            
+            lightbox?.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox?.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft' && !isLightboxTransitioning) {
+                    navigateLightbox(-1);
+                } else if (e.key === 'ArrowRight' && !isLightboxTransitioning) {
+                    navigateLightbox(1);
                 }
-            });
-
-            // Dropdown for mobile
-            const dropdowns = document.querySelectorAll('.dropdown');
-            dropdowns.forEach(dropdown => {
-                const link = dropdown.querySelector('a');
-                link.addEventListener('click', (e) => {
-                    if (window.innerWidth <= 768) {
-                        e.preventDefault();
-                        dropdown.classList.toggle('active');
-                    }
-                });
             });
         });
 
+        // Modal functions
+        function openRequestModal() {
+            document.getElementById('requestModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeRequestModal() {
+            document.getElementById('requestModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
         // Notification function
         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
@@ -1863,102 +1834,12 @@
             `;
             document.body.appendChild(notification);
             
-            setTimeout(() => {
-                notification.classList.add('show');
-            }, 100);
-            
+            setTimeout(() => notification.classList.add('show'), 100);
             setTimeout(() => {
                 notification.classList.remove('show');
-                setTimeout(() => {
-                    notification.remove();
-                }, 300);
+                setTimeout(() => notification.remove(), 300);
             }, 5000);
         }
-
-        // Lightbox functionality
-        const lightbox = document.getElementById('executiveLightbox');
-        const lightboxImage = document.getElementById('lightboxImage');
-        const lightboxQuote = document.getElementById('lightboxQuote');
-        const lightboxCounter = document.getElementById('lightboxCounter');
-        const lightboxClose = document.getElementById('lightboxClose');
-        const lightboxPrev = document.getElementById('lightboxPrev');
-        const lightboxNext = document.getElementById('lightboxNext');
-        
-        const galleryData = siteData.projects?.map(p => ({
-            img: p.image,
-            quote: p.subtitle,
-            category: p.category
-        })) || [];
-        
-        let currentImageIndex = 0;
-        let isLightboxTransitioning = false;
-        
-        document.querySelectorAll('.portfolio-image').forEach((img, index) => {
-            img.addEventListener('click', () => {
-                currentImageIndex = index;
-                openLightbox();
-            });
-        });
-        
-        function openLightbox() {
-            updateLightbox();
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-        
-        function navigateLightbox(direction) {
-            if (isLightboxTransitioning) return;
-            isLightboxTransitioning = true;
-            lightboxImage.style.opacity = '0';
-            lightboxQuote.style.opacity = '0';
-            
-            setTimeout(() => {
-                currentImageIndex = (currentImageIndex + direction + galleryData.length) % galleryData.length;
-                updateLightbox();
-                lightboxImage.style.opacity = '1';
-                lightboxQuote.style.opacity = '1';
-                isLightboxTransitioning = false;
-            }, 300);
-        }
-        
-        function updateLightbox() {
-            const data = galleryData[currentImageIndex] || {
-                img: '/assets/me.png',
-                quote: 'Professional Portfolio',
-                category: 'Executive Leadership'
-            };
-            lightboxImage.src = data.img;
-            lightboxImage.alt = data.category;
-            lightboxQuote.textContent = data.quote;
-            lightboxCounter.textContent = `${currentImageIndex + 1} / ${galleryData.length}`;
-        }
-        
-        lightboxPrev.addEventListener('click', () => navigateLightbox(-1));
-        lightboxNext.addEventListener('click', () => navigateLightbox(1));
-        lightboxClose.addEventListener('click', closeLightbox);
-        
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-        
-        document.addEventListener('keydown', (e) => {
-            if (!lightbox.classList.contains('active')) return;
-            
-            if (e.key === 'Escape') {
-                closeLightbox();
-            } else if (e.key === 'ArrowLeft' && !isLightboxTransitioning) {
-                navigateLightbox(-1);
-            } else if (e.key === 'ArrowRight' && !isLightboxTransitioning) {
-                navigateLightbox(1);
-            }
-        });
     </script>
 </body>
 </html>
