@@ -1,0 +1,7 @@
+# robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+
+Sitemap: https://davidige.com/sitemap.xml

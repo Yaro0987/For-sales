@@ -1,0 +1,514 @@
+<!-- portfolio.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>David IGE - Product Portfolio | Fintech & AI Products</title>
+    <meta name="description" content="Explore David IGE's product portfolio featuring innovative Fintech solutions, AI products, and digital platforms built for African markets.">
+    <meta name="keywords" content="Product Portfolio, Fintech Products, AI Products, Digital Platforms, African Tech">
+    <meta name="author" content="David Oloruntobi IGE">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="David IGE - Product Portfolio">
+    <meta property="og:description" content="Fintech, AI, and Digital Products built for African markets">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://davidige.com/portfolio">
+    <meta property="og:image" content="/assets/me.png">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://davidige.com/portfolio">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Google Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    
+    <style>
+        /* Portfolio specific styles */
+        .portfolio-hero {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
+            padding: 160px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(181, 148, 16, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+        
+        .portfolio-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .portfolio-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .portfolio-filters {
+            padding: 40px 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 12px 24px;
+            border: 2px solid var(--light-gray);
+            background: transparent;
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--dark-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-sans);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .portfolio-grid {
+            padding: 80px 0;
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 2;
+        }
+        
+        .featured-badge .material-symbols-outlined {
+            font-size: 18px;
+        }
+        
+        .portfolio-metrics {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .portfolio-metric {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+        
+        .portfolio-metric .material-symbols-outlined {
+            font-size: 18px;
+            color: var(--accent-gold);
+        }
+        
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-link:hover {
+            color: var(--accent-gold);
+            gap: 12px;
+        }
+        
+        .portfolio-link .material-symbols-outlined {
+            font-size: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .portfolio-hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+    
+    <!-- Header -->
+    <header class="executive-header" id="mainHeader">
+        <div class="container">
+            <nav class="executive-nav">
+                <a href="/" class="executive-logo">
+                    <div class="logo-badge">
+                        <img src="/assets/logo.png" alt="David IGE Logo">
+                    </div>
+                    <div class="logo-text">
+                        <div class="logo-name">David IGE</div>
+                        <div class="logo-title">Product Leader</div>
+                    </div>
+                </a>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                
+                <ul class="executive-nav-links" id="navLinks">
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/#about" class="nav-link">About</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link">Drop</a>
+                        <div class="dropdown-content">
+                            <a href="#" id="requestInfoBtn">Request Info</a>
+                            <a href="/cv">View CV</a>
+                        </div>
+                    </li>
+                    <li><a href="/#work" class="nav-link">Work</a></li>
+                    <li><a href="/#volunteer" class="nav-link">Volunteer</a></li>
+                    <li><a href="/#certificates" class="nav-link">Certificates</a></li>
+                    <li><a href="/#education" class="nav-link">Education</a></li>
+                    <li><a href="/#skills" class="nav-link">Skills</a></li>
+                    <li><a href="/portfolio" class="nav-link active">Portfolio</a></li>
+                    <li><a href="/#contact" class="nav-cta">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Portfolio Hero -->
+    <section class="portfolio-hero">
+        <div class="container">
+            <h1>Product Portfolio</h1>
+            <p>Innovative Fintech, AI, and Digital Products built for African markets</p>
+        </div>
+    </section>
+    
+    <!-- Filters -->
+    <section class="portfolio-filters">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="Fintech">Fintech</button>
+                <button class="filter-btn" data-filter="AI Product">AI Products</button>
+                <button class="filter-btn" data-filter="EdTech">EdTech</button>
+                <button class="filter-btn" data-filter="Marketplace">Marketplace</button>
+                <button class="filter-btn" data-filter="featured">Featured</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Portfolio Grid -->
+    <section class="portfolio-grid">
+        <div class="container">
+            <div class="portfolio-grid" id="portfolioContainer">
+                <!-- Projects will be loaded dynamically from data.js -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="executive-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>David IGE</h3>
+                    <p>Senior Product/Programmes Manager with 6+ years of experience scaling digital programmes and Fintech solutions across Africa.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/portfolio">Portfolio</a></li>
+                        <li><a href="/cv">CV</a></li>
+                        <li><a href="/#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Product Strategy</a></li>
+                        <li><a href="#">Fintech Consulting</a></li>
+                        <li><a href="#">Team Development</a></li>
+                        <li><a href="#">Product Workshops</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <p>Lagos, Nigeria</p>
+                    <p>david.ige@example.com</p>
+                    <p>+234 803 456 7890</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> David Oloruntobi IGE. All rights reserved. | Product Leader</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Request Info Modal -->
+    <div class="executive-modal" id="requestModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Request Information</h2>
+                <button class="modal-close" id="requestModalClose">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="executiveRequestForm">
+                    <div class="form-group">
+                        <label for="requestName" class="form-label">Full Name *</label>
+                        <input type="text" id="requestName" name="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="requestEmail" class="form-label">Email Address *</label>
+                        <input type="email" id="requestEmail" name="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="requestCompany" class="form-label">Company/Organization</label>
+                        <input type="text" id="requestCompany" name="company" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="requestPosition" class="form-label">Your Position</label>
+                        <input type="text" id="requestPosition" name="position" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="requestType" class="form-label">Information Requested *</label>
+                        <select id="requestType" name="requestType" class="form-control" required>
+                            <option value="">Select type</option>
+                            <option value="cv">Full CV/Resume</option>
+                            <option value="references">Professional References</option>
+                            <option value="portfolio">Detailed Portfolio</option>
+                            <option value="consultation">Consultation</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="requestDetails" class="form-label">Additional Details *</label>
+                        <textarea id="requestDetails" name="details" class="form-control" rows="4" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="executive-btn btn-primary" style="width: 100%;">
+                        <span class="material-symbols-outlined">send</span> Submit Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/js/data.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const portfolioContainer = document.getElementById('portfolioContainer');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const requestModal = document.getElementById('requestModal');
+            const requestInfoBtn = document.getElementById('requestInfoBtn');
+            const requestModalClose = document.getElementById('requestModalClose');
+            
+            // Load projects from data.js
+            function loadProjects(filter = 'all') {
+                let projects = siteData.projects;
+                
+                if (filter === 'featured') {
+                    projects = projects.filter(p => p.featured);
+                } else if (filter !== 'all') {
+                    projects = projects.filter(p => p.category === filter);
+                }
+                
+                portfolioContainer.innerHTML = projects.map(project => `
+                    <a href="/portfolio/${project.slug}" class="portfolio-item" style="text-decoration: none; color: inherit; display: block;">
+                        ${project.featured ? `
+                            <div class="featured-badge">
+                                <span class="material-symbols-outlined">star</span>
+                                Featured
+                            </div>
+                        ` : ''}
+                        <div style="position: relative;">
+                            <img src="${project.image}" alt="${project.title}" class="portfolio-image" style="width: 100%; height: 250px; object-fit: cover;">
+                        </div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title">${project.title}</h3>
+                            <div class="portfolio-subtitle">${project.subtitle}</div>
+                            
+                            <div class="portfolio-metrics">
+                                ${project.metrics ? `
+                                    <div class="portfolio-metric">
+                                        <span class="material-symbols-outlined">group</span>
+                                        ${project.metrics.users || project.metrics.creators || 'N/A'}
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="material-symbols-outlined">trending_up</span>
+                                        ${project.metrics.userGrowth || project.metrics.growth || 'N/A'}
+                                    </div>
+                                ` : ''}
+                            </div>
+                            
+                            <p style="color: var(--medium-gray); margin: 15px 0; line-height: 1.6;">${project.summary}</p>
+                            
+                            <div class="portfolio-tags">
+                                ${project.tags.slice(0, 4).map(tag => `
+                                    <span class="portfolio-tag">${tag}</span>
+                                `).join('')}
+                            </div>
+                            
+                            <div class="portfolio-link">
+                                View Project
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </div>
+                        </div>
+                    </a>
+                `).join('');
+            }
+            
+            // Initial load
+            loadProjects('all');
+            
+            // Filter functionality
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    loadProjects(this.dataset.filter);
+                });
+            });
+            
+            // Request Info Modal
+            if (requestInfoBtn) {
+                requestInfoBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    requestModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            if (requestModalClose) {
+                requestModalClose.addEventListener('click', function() {
+                    requestModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+            
+            requestModal.addEventListener('click', function(e) {
+                if (e.target === requestModal) {
+                    requestModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Request Form
+            const requestForm = document.getElementById('executiveRequestForm');
+            if (requestForm) {
+                requestForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = {
+                        name: document.getElementById('requestName').value,
+                        email: document.getElementById('requestEmail').value,
+                        company: document.getElementById('requestCompany').value,
+                        position: document.getElementById('requestPosition').value,
+                        requestType: document.getElementById('requestType').value,
+                        details: document.getElementById('requestDetails').value,
+                        date: new Date().toISOString(),
+                        status: 'pending'
+                    };
+                    
+                    const requests = JSON.parse(localStorage.getItem('requests') || '[]');
+                    requests.push(formData);
+                    localStorage.setItem('requests', JSON.stringify(requests));
+                    
+                    showNotification('Request submitted successfully!', 'success');
+                    requestForm.reset();
+                    requestModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+            
+            function showNotification(message, type) {
+                const notification = document.createElement('div');
+                notification.className = `notification notification-${type}`;
+                notification.innerHTML = `
+                    <span class="material-symbols-outlined">${type === 'success' ? 'check_circle' : 'info'}</span>
+                    <span>${message}</span>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 100);
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                }, 3000);
+            }
+            
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>

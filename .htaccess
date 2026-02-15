@@ -1,0 +1,93 @@
+# .htaccess
+# URL Rewriting Configuration for Apache
+
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Set base directory
+RewriteBase /
+
+# Force HTTPS (uncomment in production)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# Remove trailing slashes
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [R=301,L]
+
+# Pretty URLs for portfolio items
+# /portfolio/project-name -> /view.html?slug=project-name
+RewriteRule ^portfolio/([a-zA-Z0-9-]+)/?$ /view.html?slug=$1 [QSA,L]
+
+# Pretty URL for portfolio listing
+RewriteRule ^portfolio/?$ /portfolio.html [L]
+
+# Pretty URL for CV
+RewriteRule ^cv/?$ /cv.html [L]
+
+# Admin URL
+RewriteRule ^admin/?$ /admin.html [L]
+
+# Handle 404 errors
+ErrorDocument 404 /404.html
+
+# Cache static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Images
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # CSS, JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    
+    # Fonts
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# Compress files
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json
+    AddOutputFilterByType DEFLATE application/xml application/rss+xml application/atom+xml
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+    # XSS Protection
+    Header set X-XSS-Protection "1; mode=block"
+    
+    # Prevent MIME sniffing
+    Header set X-Content-Type-Options "nosniff"
+    
+    # Referrer Policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Permissions Policy
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    
+    # CSP Header (adjust as needed)
+    # Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;"
+</IfModule>
+
+# Block access to sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(env|config|json|lock|log)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Custom error page
+ErrorDocument 404 /404.html
