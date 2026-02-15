@@ -1,26 +1,35 @@
-<!-- portfolio/[slug]/index.html (or view.html as template) -->
+<!-- view.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Dynamic SEO Meta Tags -->
+    <!-- Dynamic Meta Tags -->
     <title id="metaTitle">David IGE - Project</title>
     <meta name="description" id="metaDescription" content="">
     <meta name="keywords" id="metaKeywords" content="">
-    <meta name="author" content="David Oloruntobi IGE">
+    <meta name="author" id="metaAuthor" content="David Oloruntobi IGE">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph -->
-    <meta property="og:title" id="ogTitle" content="">
-    <meta property="og:description" id="ogDescription" content="">
     <meta property="og:type" content="article">
     <meta property="og:url" id="ogUrl" content="">
+    <meta property="og:title" id="ogTitle" content="">
+    <meta property="og:description" id="ogDescription" content="">
     <meta property="og:image" id="ogImage" content="">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" id="twitterUrl" content="">
+    <meta name="twitter:title" id="twitterTitle" content="">
+    <meta name="twitter:description" id="twitterDescription" content="">
+    <meta name="twitter:image" id="twitterImage" content="">
     
     <!-- Canonical -->
-    <link rel="canonical" id="canonical" href="">
+    <link rel="canonical" id="canonicalUrl" href="">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/logo.png">
@@ -32,8 +41,15 @@
     
     <!-- Google Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     
-    <!-- Styles -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Main Styles -->
     <link rel="stylesheet" href="/css/styles.css">
     
     <style>
@@ -148,7 +164,8 @@
             margin-bottom: 20px;
         }
         
-        .project-description ul {
+        .project-description ul,
+        .project-description ol {
             margin-bottom: 20px;
             padding-left: 20px;
         }
@@ -330,10 +347,6 @@
             color: var(--accent-gold);
         }
         
-        .reaction-btn .material-symbols-outlined {
-            font-size: 20px;
-        }
-        
         .admin-reply {
             margin-top: 15px;
             padding: 15px;
@@ -353,10 +366,6 @@
         
         .admin-reply-header .material-symbols-outlined {
             color: var(--accent-gold);
-        }
-        
-        .admin-reply-text {
-            color: var(--dark-gray);
         }
         
         .related-projects {
@@ -406,6 +415,60 @@
             font-size: 0.9rem;
         }
         
+        .back-to-portfolio {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--white);
+            text-decoration: none;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-portfolio:hover {
+            opacity: 1;
+            gap: 12px;
+        }
+        
+        .floating-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .floating-fab.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .fab-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: var(--shadow-elevated);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .fab-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+        }
+        
         @media (max-width: 768px) {
             .project-hero h1 {
                 font-size: 2.5rem;
@@ -415,14 +478,22 @@
             .related-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Menu Overlay -->
-    <div class="menu-overlay" id="menuOverlay"></div>
-    
-    <!-- Header -->
+    <!-- Floating Action Button -->
+    <div class="floating-fab" id="floatingFab">
+        <button class="fab-btn" onclick="openRequestModal()" title="Request Information">
+            <span class="material-symbols-rounded">description</span>
+        </button>
+    </div>
+
+    <!-- Header (same as index) -->
     <header class="executive-header" id="mainHeader">
         <div class="container">
             <nav class="executive-nav">
@@ -431,7 +502,7 @@
                         <img src="/assets/logo.png" alt="David IGE Logo">
                     </div>
                     <div class="logo-text">
-                        <div class="logo-name">David IGE</div>
+                        <div class="logo-name" id="logoName">DAVID IGE</div>
                         <div class="logo-title">Product Leader</div>
                     </div>
                 </a>
@@ -444,10 +515,10 @@
                     <li><a href="/" class="nav-link">Home</a></li>
                     <li><a href="/#about" class="nav-link">About</a></li>
                     <li class="dropdown">
-                        <a href="#" class="nav-link">Drop</a>
+                        <a href="#" class="nav-link">Resources</a>
                         <div class="dropdown-content">
-                            <a href="#" id="requestInfoBtn">Request Info</a>
                             <a href="/cv">View CV</a>
+                            <a href="#" onclick="openRequestModal()">Request Information</a>
                         </div>
                     </li>
                     <li><a href="/#work" class="nav-link">Work</a></li>
@@ -455,107 +526,115 @@
                     <li><a href="/#certificates" class="nav-link">Certificates</a></li>
                     <li><a href="/#education" class="nav-link">Education</a></li>
                     <li><a href="/#skills" class="nav-link">Skills</a></li>
-                    <li><a href="/portfolio" class="nav-link">Portfolio</a></li>
+                    <li><a href="/portfolio" class="nav-link active">Portfolio</a></li>
                     <li><a href="/#contact" class="nav-cta">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     
-    <!-- Project Content - Will be dynamically populated -->
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+    
+    <!-- Project Content -->
     <div id="projectContent"></div>
     
-    <!-- Footer -->
+    <!-- Footer (same as index) -->
     <footer class="executive-footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>David IGE</h3>
-                    <p>Senior Product/Programmes Manager with 6+ years of experience scaling digital programmes and Fintech solutions across Africa.</p>
+                    <h3 id="footerName"></h3>
+                    <p id="footerBio"></p>
+                    <div class="social-links" id="footerSocialLinks"></div>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/portfolio">Portfolio</a></li>
-                        <li><a href="/cv">CV</a></li>
-                        <li><a href="/#contact">Contact</a></li>
-                    </ul>
+                    <ul class="footer-links" id="footerQuickLinks"></ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Product Strategy</a></li>
-                        <li><a href="#">Fintech Consulting</a></li>
-                        <li><a href="#">Team Development</a></li>
-                        <li><a href="#">Product Workshops</a></li>
-                    </ul>
+                    <ul class="footer-links" id="footerServices"></ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Contact</h3>
-                    <p>Lagos, Nigeria</p>
-                    <p>david.ige@example.com</p>
-                    <p>+234 803 456 7890</p>
+                    <p id="footerContactLocation"></p>
+                    <p id="footerContactEmail"></p>
+                    <p id="footerContactPhone"></p>
+                    <p>Available for opportunities</p>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; <span id="currentYear"></span> David Oloruntobi IGE. All rights reserved. | Product Leader</p>
+                <p>&copy; <span id="currentYear"></span> <span id="copyrightName"></span>. All rights reserved. | Product Leader</p>
             </div>
         </div>
     </footer>
     
-    <!-- Request Info Modal -->
+    <!-- Lightbox -->
+    <div class="executive-lightbox" id="executiveLightbox">
+        <button class="lightbox-close" id="lightboxClose">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <div class="lightbox-content">
+            <button class="lightbox-navigation lightbox-prev" id="lightboxPrev">
+                <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            <p class="lightbox-quote" id="lightboxQuote"></p>
+            <button class="lightbox-navigation lightbox-next" id="lightboxNext">
+                <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+            <div class="lightbox-counter" id="lightboxCounter"></div>
+        </div>
+    </div>
+    
+    <!-- Request Modal -->
     <div class="executive-modal" id="requestModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Request Information</h2>
-                <button class="modal-close" id="requestModalClose">
+                <h2>Request Professional Information</h2>
+                <button class="modal-close" onclick="closeRequestModal()">
                     <span class="material-symbols-outlined">close</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="executiveRequestForm">
+                <form id="requestForm">
                     <div class="form-group">
-                        <label for="requestName" class="form-label">Full Name *</label>
-                        <input type="text" id="requestName" name="name" class="form-control" required>
+                        <label for="reqName" class="form-label">Full Name *</label>
+                        <input type="text" id="reqName" class="form-control" required>
                     </div>
-                    
                     <div class="form-group">
-                        <label for="requestEmail" class="form-label">Email Address *</label>
-                        <input type="email" id="requestEmail" name="email" class="form-control" required>
+                        <label for="reqEmail" class="form-label">Professional Email *</label>
+                        <input type="email" id="reqEmail" class="form-control" required>
                     </div>
-                    
                     <div class="form-group">
-                        <label for="requestCompany" class="form-label">Company/Organization</label>
-                        <input type="text" id="requestCompany" name="company" class="form-control">
+                        <label for="reqCompany" class="form-label">Company/Organization *</label>
+                        <input type="text" id="reqCompany" class="form-control" required>
                     </div>
-                    
                     <div class="form-group">
-                        <label for="requestPosition" class="form-label">Your Position</label>
-                        <input type="text" id="requestPosition" name="position" class="form-control">
+                        <label for="reqPosition" class="form-label">Your Position *</label>
+                        <input type="text" id="reqPosition" class="form-control" required>
                     </div>
-                    
                     <div class="form-group">
-                        <label for="requestType" class="form-label">Information Requested *</label>
-                        <select id="requestType" name="requestType" class="form-control" required>
+                        <label for="reqType" class="form-label">Information Requested *</label>
+                        <select id="reqType" class="form-control" required>
                             <option value="">Select type</option>
-                            <option value="cv">Full CV/Resume</option>
+                            <option value="cv">Full Executive CV</option>
                             <option value="references">Professional References</option>
+                            <option value="certifications">Certifications & Credentials</option>
                             <option value="portfolio">Detailed Portfolio</option>
-                            <option value="consultation">Consultation</option>
+                            <option value="availability">Current Availability</option>
                             <option value="other">Other</option>
                         </select>
                     </div>
-                    
                     <div class="form-group">
-                        <label for="requestDetails" class="form-label">Additional Details *</label>
-                        <textarea id="requestDetails" name="details" class="form-control" rows="4" required></textarea>
+                        <label for="reqDetails" class="form-label">Purpose & Additional Details *</label>
+                        <textarea id="reqDetails" class="form-control" rows="4" required></textarea>
                     </div>
-                    
                     <button type="submit" class="executive-btn btn-primary" style="width: 100%;">
                         <span class="material-symbols-outlined">send</span> Submit Request
                     </button>
@@ -564,47 +643,119 @@
         </div>
     </div>
     
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="/js/data.js"></script>
     <script src="/js/main.js"></script>
+    
     <script>
+        const baseUrl = window.location.origin;
+        
+        // Initialize AOS
+        AOS.init({ duration: 800, once: true });
+
         document.addEventListener('DOMContentLoaded', function() {
+            if (typeof siteData === 'undefined') {
+                console.error('siteData not loaded');
+                window.location.href = '/portfolio';
+                return;
+            }
+
             // Get project slug from URL
             const path = window.location.pathname;
             const slug = path.split('/').filter(p => p).pop() || '';
             
             // Find project in data.js
-            const project = siteData.projects.find(p => p.slug === slug);
+            const project = siteData.projects?.find(p => (p.slug || p.id) === slug);
             
             if (!project) {
                 window.location.href = '/portfolio';
                 return;
             }
+
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Update meta tags dynamically
+            const pageUrl = baseUrl + `/portfolio/${slug}`;
+            const imageUrl = baseUrl + (project.image || '/assets/me.png');
             
-            // Update meta tags
             document.getElementById('metaTitle').textContent = `${project.title} - David IGE Portfolio`;
             document.getElementById('metaDescription').content = project.summary;
-            document.getElementById('metaKeywords').content = project.tags.join(', ');
+            document.getElementById('metaKeywords').content = project.tags?.join(', ') || '';
+            document.getElementById('metaAuthor').content = siteData.meta?.author || 'David Oloruntobi IGE';
+            
+            document.getElementById('ogUrl').content = pageUrl;
             document.getElementById('ogTitle').content = project.title;
             document.getElementById('ogDescription').content = project.summary;
-            document.getElementById('ogUrl').content = `https://davidige.com/portfolio/${project.slug}`;
-            document.getElementById('ogImage').content = project.image;
-            document.getElementById('canonical').href = `https://davidige.com/portfolio/${project.slug}`;
+            document.getElementById('ogImage').content = imageUrl;
             
-            // Render project
-            const projectContent = document.getElementById('projectContent');
+            document.getElementById('twitterUrl').content = pageUrl;
+            document.getElementById('twitterTitle').content = project.title;
+            document.getElementById('twitterDescription').content = project.summary;
+            document.getElementById('twitterImage').content = imageUrl;
             
+            document.getElementById('canonicalUrl').href = pageUrl;
+
+            // Update personal info in footer
+            if (siteData.personal) {
+                const p = siteData.personal;
+                
+                document.getElementById('footerName').textContent = p.name.split(' ').slice(0, 2).join(' ');
+                document.getElementById('footerBio').textContent = p.shortBio || p.about.substring(0, 150) + '...';
+                document.getElementById('copyrightName').textContent = p.name;
+                
+                document.getElementById('footerContactLocation').textContent = p.location;
+                document.getElementById('footerContactEmail').textContent = p.email;
+                document.getElementById('footerContactPhone').textContent = p.phone || '+234 803 456 7890';
+                
+                // Logo
+                document.getElementById('logoName').textContent = p.name.split(' ').slice(0, 2).join(' ');
+            }
+
+            // Footer Social Links
+            if (siteData.personal?.social) {
+                const social = siteData.personal.social;
+                document.getElementById('footerSocialLinks').innerHTML = `
+                    <a href="${social.linkedin}" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="${social.twitter}" class="social-link" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                    <a href="${social.github}" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                `;
+            }
+
+            // Footer Quick Links
+            if (siteData.navigation) {
+                document.getElementById('footerQuickLinks').innerHTML = siteData.navigation
+                    .filter(item => !item.dropdown)
+                    .map(item => `<li><a href="${item.link}"><span class="material-symbols-outlined">chevron_right</span> ${item.label}</a></li>`)
+                    .join('');
+            }
+
+            // Footer Services
+            if (siteData.footer?.services) {
+                document.getElementById('footerServices').innerHTML = siteData.footer.services
+                    .map(service => `<li><a href="${service.link}"><span class="material-symbols-outlined">chevron_right</span> ${service.label}</a></li>`)
+                    .join('');
+            }
+
             // Get related projects
             const relatedProjects = siteData.projects
-                .filter(p => p.id !== project.id && p.category === project.category)
-                .slice(0, 3);
-            
+                ?.filter(p => p.id !== project.id && p.category === project.category)
+                .slice(0, 3) || [];
+
             // Get comments for this project
-            const projectComments = siteData.comments.filter(c => c.projectId === project.id && c.approved);
+            const projectComments = siteData.comments?.filter(c => c.projectId === project.id && c.approved) || [];
+
+            // Render project content
+            const projectContent = document.getElementById('projectContent');
             
             projectContent.innerHTML = `
                 <!-- Project Hero -->
                 <section class="project-hero">
                     <div class="container">
+                        <a href="/portfolio" class="back-to-portfolio">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Back to Portfolio
+                        </a>
                         <div class="project-hero-content">
                             <span class="project-category">${project.category}</span>
                             <h1>${project.title}</h1>
@@ -613,11 +764,11 @@
                             <div class="project-meta">
                                 <div class="project-meta-item">
                                     <span class="material-symbols-outlined">schedule</span>
-                                    <span>${project.timeline}</span>
+                                    <span>${project.timeline || 'Current'}</span>
                                 </div>
                                 <div class="project-meta-item">
                                     <span class="material-symbols-outlined">person</span>
-                                    <span>${project.role}</span>
+                                    <span>${project.role || 'Product Lead'}</span>
                                 </div>
                                 ${project.metrics ? `
                                     <div class="project-meta-item">
@@ -644,11 +795,13 @@
                         </div>
                         
                         <!-- Tech Stack -->
-                        <div class="tech-stack">
-                            ${project.technologies.map(tech => `
-                                <span class="tech-tag">${tech}</span>
-                            `).join('')}
-                        </div>
+                        ${project.technologies ? `
+                            <div class="tech-stack">
+                                ${project.technologies.map(tech => `
+                                    <span class="tech-tag">${tech}</span>
+                                `).join('')}
+                            </div>
+                        ` : ''}
                         
                         <!-- Metrics -->
                         ${project.metrics ? `
@@ -663,18 +816,20 @@
                         ` : ''}
                         
                         <!-- Outcome -->
-                        <div class="project-description">
-                            <h3 class="project-section-title">Outcome & Impact</h3>
-                            <p>${project.outcome}</p>
-                        </div>
+                        ${project.outcome ? `
+                            <div class="project-description">
+                                <h3 class="project-section-title">Outcome & Impact</h3>
+                                <p>${project.outcome}</p>
+                            </div>
+                        ` : ''}
                         
                         <!-- Gallery -->
                         ${project.gallery ? `
                             <div class="project-description">
                                 <h3 class="project-section-title">Project Gallery</h3>
                                 <div class="gallery-grid">
-                                    ${project.gallery.map(img => `
-                                        <img src="${img}" alt="Project gallery" class="gallery-image" onclick="openLightbox('${img}')">
+                                    ${project.gallery.map((img, index) => `
+                                        <img src="${img}" alt="Project gallery ${index + 1}" class="gallery-image" onclick="openLightbox(${index})">
                                     `).join('')}
                                 </div>
                             </div>
@@ -770,7 +925,7 @@
                             <h3 class="project-section-title">Related Projects</h3>
                             <div class="related-grid">
                                 ${relatedProjects.map(related => `
-                                    <a href="/portfolio/${related.slug}" class="related-item">
+                                    <a href="/portfolio/${related.slug || related.id}" class="related-item">
                                         <img src="${related.image}" alt="${related.title}" class="related-image">
                                         <div class="related-content">
                                             <div class="related-title">${related.title}</div>
@@ -783,7 +938,75 @@
                     </section>
                 ` : ''}
             `;
+
+            // Lightbox gallery data
+            const galleryImages = project.gallery || [project.image];
             
+            // Lightbox functions
+            const lightbox = document.getElementById('executiveLightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxQuote = document.getElementById('lightboxQuote');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxPrev = document.getElementById('lightboxPrev');
+            const lightboxNext = document.getElementById('lightboxNext');
+            
+            let currentImageIndex = 0;
+            let isLightboxTransitioning = false;
+            
+            window.openLightbox = function(index) {
+                currentImageIndex = index;
+                updateLightbox();
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            };
+            
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            function navigateLightbox(direction) {
+                if (isLightboxTransitioning) return;
+                isLightboxTransitioning = true;
+                lightboxImage.style.opacity = '0';
+                lightboxQuote.style.opacity = '0';
+                
+                setTimeout(() => {
+                    currentImageIndex = (currentImageIndex + direction + galleryImages.length) % galleryImages.length;
+                    updateLightbox();
+                    lightboxImage.style.opacity = '1';
+                    lightboxQuote.style.opacity = '1';
+                    isLightboxTransitioning = false;
+                }, 300);
+            }
+            
+            function updateLightbox() {
+                lightboxImage.src = galleryImages[currentImageIndex];
+                lightboxQuote.textContent = project.subtitle;
+                lightboxCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
+            }
+            
+            lightboxPrev?.addEventListener('click', () => navigateLightbox(-1));
+            lightboxNext?.addEventListener('click', () => navigateLightbox(1));
+            lightboxClose?.addEventListener('click', closeLightbox);
+            
+            lightbox?.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox?.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft' && !isLightboxTransitioning) {
+                    navigateLightbox(-1);
+                } else if (e.key === 'ArrowRight' && !isLightboxTransitioning) {
+                    navigateLightbox(1);
+                }
+            });
+
             // Comment form handling
             const commentForm = document.getElementById('projectCommentForm');
             const ratingStars = document.querySelectorAll('.rating-star');
@@ -795,16 +1018,12 @@
                     selectedRating = rating;
                     
                     ratingStars.forEach((s, i) => {
-                        if (i < rating) {
-                            s.classList.add('active');
-                        } else {
-                            s.classList.remove('active');
-                        }
+                        s.classList.toggle('active', i < rating);
                     });
                 });
             });
             
-            commentForm.addEventListener('submit', function(e) {
+            commentForm?.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
                 const commentData = {
@@ -823,7 +1042,6 @@
                     replies: []
                 };
                 
-                // Save to localStorage
                 const comments = JSON.parse(localStorage.getItem('comments') || '[]');
                 comments.push(commentData);
                 localStorage.setItem('comments', JSON.stringify(comments));
@@ -833,7 +1051,7 @@
                 ratingStars.forEach(s => s.classList.remove('active'));
                 selectedRating = 0;
             });
-            
+
             // Reaction buttons
             document.querySelectorAll('.reaction-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -874,110 +1092,117 @@
                 if (parts.length === 2) return parts.pop().split(';').shift();
                 return null;
             }
+
+            // Mobile Menu Toggle
+            const mobileToggle = document.getElementById('mobileMenuToggle');
+            const navLinks = document.getElementById('navLinks');
+            const menuOverlay = document.getElementById('menuOverlay');
             
-            function showNotification(message, type) {
-                const notification = document.createElement('div');
-                notification.className = `notification notification-${type}`;
-                notification.innerHTML = `
-                    <span class="material-symbols-outlined">${type === 'success' ? 'check_circle' : 'info'}</span>
-                    <span>${message}</span>
-                `;
+            if (mobileToggle && navLinks) {
+                mobileToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    menuOverlay.classList.toggle('active');
+                    document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+                    mobileToggle.innerHTML = navLinks.classList.contains('active') 
+                        ? '<span class="material-symbols-outlined">close</span>'
+                        : '<span class="material-symbols-outlined">menu</span>';
+                });
                 
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    notification.classList.add('show');
-                }, 100);
-                
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                    setTimeout(() => {
-                        notification.remove();
-                    }, 300);
-                }, 3000);
+                menuOverlay.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    mobileToggle.innerHTML = '<span class="material-symbols-outlined">menu</span>';
+                });
             }
-            
-            // Lightbox function
-            window.openLightbox = function(imageSrc) {
-                const lightbox = document.createElement('div');
-                lightbox.className = 'executive-lightbox active';
-                lightbox.innerHTML = `
-                    <div class="lightbox-content">
-                        <button class="lightbox-close" onclick="this.closest('.executive-lightbox').remove()">
-                            <span class="material-symbols-outlined">close</span>
-                        </button>
-                        <img src="${imageSrc}" class="lightbox-image" style="opacity: 1;">
-                    </div>
-                `;
-                document.body.appendChild(lightbox);
-                document.body.style.overflow = 'hidden';
+
+            // Header Scroll Effect
+            const header = document.getElementById('mainHeader');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.scrollY > 50);
                 
-                lightbox.addEventListener('click', function(e) {
-                    if (e.target === lightbox) {
-                        lightbox.remove();
-                        document.body.style.overflow = '';
+                // Floating FAB
+                const floatingFab = document.getElementById('floatingFab');
+                floatingFab.classList.toggle('visible', window.scrollY > 300);
+            });
+
+            // Dropdown for mobile
+            document.querySelectorAll('.dropdown > a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        link.parentElement.classList.toggle('active');
                     }
                 });
-            };
-            
-            // Request Info Modal
-            const requestModal = document.getElementById('requestModal');
-            const requestInfoBtn = document.getElementById('requestInfoBtn');
-            const requestModalClose = document.getElementById('requestModalClose');
-            
-            if (requestInfoBtn) {
-                requestInfoBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    requestModal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-            }
-            
-            if (requestModalClose) {
-                requestModalClose.addEventListener('click', function() {
-                    requestModal.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            }
-            
-            requestModal.addEventListener('click', function(e) {
-                if (e.target === requestModal) {
-                    requestModal.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
             });
-            
+
             // Request Form
-            const requestForm = document.getElementById('executiveRequestForm');
+            const requestForm = document.getElementById('requestForm');
             if (requestForm) {
-                requestForm.addEventListener('submit', function(e) {
+                requestForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
                     
                     const formData = {
-                        name: document.getElementById('requestName').value,
-                        email: document.getElementById('requestEmail').value,
-                        company: document.getElementById('requestCompany').value,
-                        position: document.getElementById('requestPosition').value,
-                        requestType: document.getElementById('requestType').value,
-                        details: document.getElementById('requestDetails').value,
-                        date: new Date().toISOString(),
-                        status: 'pending'
+                        name: document.getElementById('reqName').value,
+                        email: document.getElementById('reqEmail').value,
+                        company: document.getElementById('reqCompany').value,
+                        position: document.getElementById('reqPosition').value,
+                        requestType: document.getElementById('reqType').value,
+                        details: document.getElementById('reqDetails').value
                     };
                     
-                    const requests = JSON.parse(localStorage.getItem('requests') || '[]');
-                    requests.push(formData);
-                    localStorage.setItem('requests', JSON.stringify(requests));
+                    const submitBtn = requestForm.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<span class="loader"></span> Sending...';
+                    submitBtn.disabled = true;
                     
-                    showNotification('Request submitted successfully!', 'success');
-                    requestForm.reset();
-                    requestModal.classList.remove('active');
-                    document.body.style.overflow = '';
+                    setTimeout(() => {
+                        const requests = JSON.parse(localStorage.getItem('requests') || '[]');
+                        requests.push({
+                            ...formData,
+                            id: Date.now(),
+                            date: new Date().toISOString(),
+                            status: 'pending'
+                        });
+                        localStorage.setItem('requests', JSON.stringify(requests));
+                        
+                        showNotification('Request sent successfully!', 'success');
+                        requestForm.reset();
+                        closeRequestModal();
+                        
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 2000);
                 });
             }
-            
-            // Set current year
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
         });
+
+        // Modal functions
+        function openRequestModal() {
+            document.getElementById('requestModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeRequestModal() {
+            document.getElementById('requestModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <span class="material-symbols-outlined">${type === 'success' ? 'check_circle' : 'info'}</span>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
     </script>
 </body>
 </html>
