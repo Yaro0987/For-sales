@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>secure gallery · six images with loader</title>
+    <style>
+        /* global reset: no margins, no padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* root layout: exactly viewport with scrolling */
+        html, body {
+            width: 100vw;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background: black;
+            font-size: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* main container: stacked images, full width */
+        .image-stack {
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: stretch;
+            line-height: 0;
+        }
+
+        /* each image container - full viewport width */
+        .image-stack > div {
+            width: 100vw;
+            height: auto;
+            position: relative;
+            background: #000;
+            min-height: 100px; /* minimum height while loading */
+        }
+
+        /* loader container - shows while image loads */
+        .image-loader {
+            position: relative;
+            width: 100vw;
+            height: auto;
+            min-height: 200px; /* will adjust based on image ratio once loaded */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #111;
+        }
+
+        /* loading spinner */
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #333;
+            border-top: 5px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* images themselves – hidden until loaded */
+        .image-stack img {
+            display: none;  /* hidden by default */
+            width: 100vw;
+            height: auto;
+            object-fit: contain;
+            object-position: center;
+            pointer-events: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            user-drag: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* show image when loaded */
+        .image-stack img.loaded {
+            display: block;
+        }
+
+        /* hide loader when image is loaded */
+        .image-loader.loaded {
+            display: none;
+        }
+
+        /* block right-click and save shortcuts */
+        .protection-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: transparent;
+            z-index: 9999;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-stack">
+        <!-- Image 1 with loader -->
+        <div class="image-container" data-image="1.png">
+            <div class="image-loader" id="loader-1">
+                <div class="loader-spinner"></div>
+            </div>
+            <img src="1.png" alt="image-1" draggable="false" class="lazy-image" id="img-1">
+        </div>
+        
+        <!-- Image 2 with loader -->
+        <div class="image-container" data-image="2.png">
+            <div class="image-loader" id="loader-2">
+                <div class="loader-spinner"></div>
+            </div>
+            <img src="2.png" alt="image-2" draggable="false" class="lazy-image" id="img-2">
+        </div>
+        
+        <!-- Image 3 with loader -->
+        <div class="image-container" data-image="3.png">
+            <div class="image-loader" id="loader-3">
+                <div class="loader-spinner"></div>
+            </div>
+            <img src="3.png" alt="image-3" draggable="false" class="lazy-image" id="img-3">
+        </div>
+        
+        <!-- Image 4 with loader -->
+        <div class="image-container" data-image="4.png">
+            <div class="image-loader" id="loader-4">
+                <div class="loader-spinner"></div>
+            </div>
+            <img src="4.png" alt="image-4" draggable="false" class="lazy-image" id="img-4">
+        </div>
+        
+        <!-- Image 5 with loader -->
+        <div class="image-container" data-image="5.png">
+            <div class="image-loader" id="loader-5">
+                <div class="loader-spinner"></div>
+            </div>
+            <img src="5.png" alt="image-5" draggable="false" class="lazy-image" id="img-5">
+        </div>
+        
+        <!-- Image 6 with loader -->
+        <div class="image-container" data-image="6.png">
+            <div class="image-loader" id="loader-6">
+                <div class="loader-spinner"></div>
+            </div>
+            <img src="6.png" alt="image-6" draggable="false" class="lazy-image" id="img-6">
+        </div>
+    </div>
+
+    <div class="protection-overlay" id="protector"></div>
+
+    <script>
+        (function() {
+            // ---------- ANTI-DOWNLOAD & ANTI-SCREENSHOT ----------
+            
+            // 1) disable right click entirely
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // 2) disable common key combinations for save
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 's' && (e.ctrlKey || e.metaKey)) {
+                    e.preventDefault();
+                    return false;
+                }
+                if (e.key === 'p' && (e.ctrlKey || e.metaKey)) {
+                    e.preventDefault();
+                    return false;
+                }
+                if (e.key === 'I' && e.shiftKey && (e.ctrlKey || e.metaKey)) {
+                    e.preventDefault();
+                    return false;
+                }
+                if (e.key === 'u' && (e.ctrlKey || e.metaKey)) {
+                    e.preventDefault();
+                    return false;
+                }
+                if (e.key === 'F12') {
+                    e.preventDefault();
+                    return false;
+                }
+                if ((e.key === '3' || e.key === '4') && e.shiftKey && e.metaKey) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // 3) disable drag and drop
+            window.addEventListener('dragstart', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // 4) disable copy & cut
+            document.addEventListener('copy', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            });
+            document.addEventListener('cut', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            });
+
+            // 5) prevent image selection
+            document.addEventListener('mousedown', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            });
+
+            // 6) prevent touch long press menu
+            document.addEventListener('touchstart', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
+            // ---------- LAZY LOADER WITH SCROLL DETECTION ----------
+            
+            // Get all image containers
+            const containers = document.querySelectorAll('.image-container');
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.bottom >= 0
+                );
+            }
+            
+            // Function to load image
+            function loadImage(container) {
+                const img = container.querySelector('img');
+                const loader = container.querySelector('.image-loader');
+                
+                // If image is already loaded or loading, skip
+                if (img.classList.contains('loaded') || img.classList.contains('loading')) {
+                    return;
+                }
+                
+                // Mark as loading
+                img.classList.add('loading');
+                
+                // Create new image object to preload
+                const imageUrl = container.getAttribute('data-image');
+                const tempImage = new Image();
+                
+                tempImage.onload = function() {
+                    // Image loaded successfully
+                    img.classList.remove('loading');
+                    img.classList.add('loaded');
+                    loader.classList.add('loaded');
+                    
+                    // Set the src if not already set (it should be set from HTML)
+                    if (!img.src) {
+                        img.src = imageUrl;
+                    }
+                };
+                
+                tempImage.onerror = function() {
+                    // If error loading, try again after delay
+                    console.log('Error loading image, retrying...');
+                    img.classList.remove('loading');
+                    setTimeout(() => {
+                        loadImage(container);
+                    }, 2000);
+                };
+                
+                // Start loading
+                tempImage.src = imageUrl;
+            }
+            
+            // Initial load for images in viewport
+            function loadVisibleImages() {
+                containers.forEach(container => {
+                    if (isInViewport(container)) {
+                        loadImage(container);
+                    }
+                });
+            }
+            
+            // Load first image immediately
+            setTimeout(() => {
+                if (containers.length > 0) {
+                    loadImage(containers[0]);
+                }
+            }, 100);
+            
+            // Load visible images on scroll
+            window.addEventListener('scroll', () => {
+                loadVisibleImages();
+            });
+            
+            // Also load visible images on resize
+            window.addEventListener('resize', () => {
+                loadVisibleImages();
+            });
+            
+            // Additional: Load all images after a delay? No, only on scroll/view
+            // But we want to load second image when user scrolls to it
+            
+            // Optional: Preload next image when current is loaded (for smoother experience)
+            function preloadNextImage(index) {
+                if (index < containers.length - 1) {
+                    // Check if next container is near viewport
+                    const nextContainer = containers[index + 1];
+                    const rect = nextContainer.getBoundingClientRect();
+                    
+                    // If next image is within 500px of viewport, load it
+                    if (rect.top < window.innerHeight + 500) {
+                        loadImage(nextContainer);
+                    }
+                }
+            }
+            
+            // Override loadImage to also preload next
+            const originalLoadImage = loadImage;
+            window.loadImage = function(container) {
+                originalLoadImage(container);
+                
+                // Find index and preload next
+                const index = Array.from(containers).indexOf(container);
+                if (index !== -1) {
+                    preloadNextImage(index);
+                }
+            };
+            
+            // Re-assign
+            loadImage = window.loadImage;
+            
+            // Load initial images
+            loadVisibleImages();
+            
+        })();
+    </script>
+</body>
+</html>
