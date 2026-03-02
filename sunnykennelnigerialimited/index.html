@@ -4,14 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Display Image</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background: #f0f0f0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        #loader-wrapper.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #31346A;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #content {
+            width: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+            padding: 20px;
+        }
+        
+        #content.visible {
+            opacity: 1;
+        }
+        
+        .image-container {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+        }
+        
+        .watermark {
+            position: absolute;
+            font-weight: bold;
+            font-size: 13px;
+            top: 18px;
+            left: 67px;
+            background: #31346A;
+            color: white;
+            
+            border-radius: 2px;
+        }
+    </style>
 </head>
-<body style="margin:0; display:flex; justify-content:center; background:#f0f0f0;">
-    <img src="1.png" alt="Image" style="max-width:100%; height:auto; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
-    <div style="position: absolute; top:19px; left:75px; background:#31346A; color:white; ">
-        SUNNY KANNEL
+<body>
+    <div id="loader-wrapper">
+        <div class="loader"></div>
     </div>
-    <div style="position: absolute; bottom:19px; left:75px; background:#31346A; color:white; ">
-        SUNNY KANNEL
+    
+    <div id="content">
+        <div style="display: flex; justify-content: center;">
+            <div class="image-container">
+                <img src="1.png" alt="Image" style="max-width:100%; height:auto; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+                <div class="watermark">
+                    SUNNY KANNEL
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // Wait for the image to load
+        const img = document.querySelector('img');
+        const loaderWrapper = document.getElementById('loader-wrapper');
+        const content = document.getElementById('content');
+        
+        // If image is already cached and loaded
+        if (img.complete) {
+            setTimeout(() => {
+                loaderWrapper.classList.add('fade-out');
+                content.classList.add('visible');
+            }, 500); // Minimum 500ms to show loader
+        } else {
+            // Wait for image to load
+            img.onload = () => {
+                setTimeout(() => {
+                    loaderWrapper.classList.add('fade-out');
+                    content.classList.add('visible');
+                }, 800); // Show loader for at least 800ms after load
+            };
+        }
+        
+        // Fallback: hide loader after max 3 seconds even if image fails
+        setTimeout(() => {
+            loaderWrapper.classList.add('fade-out');
+            content.classList.add('visible');
+        }, 3000);
+    </script>
 </body>
 </html>
